@@ -1,0 +1,11 @@
+.buy {
+  display: flex;
+  padding: 20px;
+  height: max-content;
+}
+
+.righBuy {
+  margin-left: auto;
+  order: 2;
+  padding-right: 30%;
+}
