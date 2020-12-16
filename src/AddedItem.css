@@ -1,0 +1,31 @@
+.addedItem {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.addedItemDetails {
+  padding-left: 20px;
+  padding-top: 30px;
+}
+.addedItemDetails button {
+  background: red;
+  border: 1px solid;
+  margin-top: 10px;
+  border-color: #a88734 #9c7e31 #846a29;
+  color: #111;
+}
+
+.addedItemImage {
+  object-fit: contain;
+  width: 180px;
+  height: 180px;
+}
+
+.addedItemStar {
+  display: flex;
+}
+
+.addedItemName {
+  font-size: 17px;
+  font-weight: 800;
+}

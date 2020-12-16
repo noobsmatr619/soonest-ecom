@@ -1,15 +1,18 @@
 import React from 'react'
 import CurrencyFormat from "react-currency-format";
 import './Total.css'
+import { useStateValue } from "./SessionState";
+import {getPriceTotal} from "./reducer"
 function Total() {
+    let [{ cart }, path] = useStateValue();
     return (
-        <div className="Total">
+        <div className="total">
              <CurrencyFormat
         renderText={(value) => (
           <>
             <p>
             
-              Subtotal (0 items): <strong>{value}</strong>
+              Subtotal ({cart?.length} products ): <strong>{value}</strong>
             </p>
             <small className="wrapperSubtotal">
               <input type="checkbox" /> Wrap this up 
@@ -17,7 +20,7 @@ function Total() {
           </>
         )}
         decimalScale={2}
-        value={0} // Part of the homework
+        value={getPriceTotal(cart)}  
         displayType={"text"}
         thousandSeparator={true}
         prefix={"£"}

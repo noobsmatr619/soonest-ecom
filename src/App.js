@@ -4,18 +4,33 @@ import Header from "./Header";
 import { BrowserRouter as Router,Switch,Route} from 'react-router-dom';
 import Home from './Home';
 import Buy from "./Buy";
+import Login from './Login';
+
+
+import { Helmet } from 'react-helmet'
+
 function App() {
   return (
+  
+
     <Router>
     <div className="app">
-    <Header />
+    <Helmet>
+    <title>{ "Soonest"}</title>
+   </Helmet>
       <Switch>
       <Route path="/buy">
+      <Header />
       <Buy/>
+      </Route>
+      <Route path="/login">
+      
+         <Login />
+     
       </Route>
 
       <Route path="/">
-    
+      <Header />
       <Home/>
       </Route>
       </Switch>

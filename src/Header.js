@@ -14,9 +14,12 @@ import SendIcon from '@material-ui/icons/Send';
 import StoreIcon from '@material-ui/icons/Store';
 import HomeIcon from '@material-ui/icons/Home';
 import BookIcon from '@material-ui/icons/Book';
+import { useStateValue } from "./SessionState";
 function Header() {
-    let [sidebarHandler , SidebarState] = useState(false);
+  let [{ cart }, path] = useStateValue();
 
+
+    let [sidebarHandler , SidebarState] = useState(false);
      let slideSidebar = () => SidebarState(!sidebarHandler);
     return (
         <div className='header' >
@@ -78,11 +81,13 @@ function Header() {
                  
                 <div className="headerRightNav">
              
-                <span className="headerBasketCount">O</span>
+                <span className="headerBasketCount">{cart?.length}</span>
                 <Link to="/buy">
                 <span className="headerRightOption"><ShoppingBasketIcon/></span> 
                 </Link>
+                <Link to="/login">
                 <span className="headerRightOption"><AccountCircleIcon/></span>
+                </Link>
                 <span className="headerRightOption"><SettingsIcon/></span>
                 </div>
                 

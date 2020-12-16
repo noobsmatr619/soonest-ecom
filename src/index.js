@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import reducer, { initialState } from './reducer';
+import { SessionState } from './SessionState';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SessionState initialState={initialState} reducer={reducer}> 
+      <App />
+      </SessionState>
   </React.StrictMode>,
   document.getElementById('root')
 );
