@@ -33,7 +33,7 @@ function App() {
       
       <Register/>
   
-   </Route>
+      </Route>
 
       <Route path="/">
       <Header />

@@ -1,5 +1,5 @@
 import React, { useState }  from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory  } from 'react-router-dom';
 import './Login.css';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import LockIcon from '@material-ui/icons/Lock';
@@ -11,21 +11,19 @@ import { useStateValue } from "./SessionState";
 function Login() {
     let[username,userEmail]=useState('');
     let[password,userPassword]=useState('');
-    // let [show , setShow] = useState(false);
-
-    // let  handleClick  = () => setShow(!show);
-    const signIn = e => {
+    const [userDetails, setUserDetails] = useState({
+        token: undefined,
+        user: undefined,
+      });
+    
+    let signIn = e => {
         e.preventDefault();
 
       
     }
 
     
-    const register = e => {
-        e.preventDefault();
-
-        
-    }
+ 
     return (
         <div className="login">
             

@@ -1,5 +1,5 @@
 import React, { useState }  from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory  } from 'react-router-dom';
 import './Register.css';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import LockIcon from '@material-ui/icons/Lock';
@@ -8,6 +8,13 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import { Grid } from '@material-ui/core';
 import { useStateValue } from "./SessionState";
 function Register() {
+
+
+    let register = e => {
+        e.preventDefault();
+
+        
+    }
     return (
         <div className="register">
               
@@ -37,7 +44,7 @@ function Register() {
         <input type='password' /><VisibilityIcon  className="icon"/> <VisibilityOffIcon  className="icon" /></Grid>
         <div className="loginPageButtons">
         <Link to="/login"> <button   type="primary" className="SigninButton"   >Log in into existing account</button></Link>
-       <button type='submit' className="SignupButton"   >Sign up</button> 
+       <button type='submit' className="SignupButton" onClick={register }   >Sign up</button> 
         </div>
         </form>
 
