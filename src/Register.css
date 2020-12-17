@@ -1,0 +1,30 @@
+.register {
+  background-color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+
+  overflow-y: hidden;
+}
+.signUp {
+  width: 300px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  padding: 20px;
+  visibility: visible;
+  transition: visibility 1s, opacity 0.5s linear;
+  opacity: 1;
+}
+
+.icon {
+  padding: 10px;
+}
+.loginHeaderLogo {
+  width: 100px;
+  object-fit: contain;
+}

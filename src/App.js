@@ -8,6 +8,7 @@ import Login from './Login';
 
 
 import { Helmet } from 'react-helmet'
+import Register from './Register';
 
 function App() {
   return (
@@ -28,6 +29,11 @@ function App() {
          <Login />
      
       </Route>
+      <Route path="/register">
+      
+      <Register/>
+  
+   </Route>
 
       <Route path="/">
       <Header />

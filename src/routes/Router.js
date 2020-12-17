@@ -1,6 +1,8 @@
 let router = require("express").Router();
 let bcrypt = require("bcryptjs");
 let User = require("../Schemas/schema");
+let Permission = require("../Permit/Permission.js");
+let jwt = require("jsonwebtoken");
 router.post("/register", async (req, res) => {
 
     //res.send("u can smoke now, it worked");
@@ -45,5 +47,61 @@ router.post("/register", async (req, res) => {
       }
     });
 
+    router.post("/login", async (req, res) => {
+        try {
+          let { email, password } = req.body;
+      
+       
+          if (!email || !password)
+            return res.status(400).json({ msg: "Full up all the fields" });
+      
+          let user = await User.findOne({ email: email });
+          if (!user)
+            return res
+              .status(400)
+              .json({ msg: "This email is not registered with us ." });
+      
+          let allow = await bcrypt.compare(password, user.password);
+          if (!allow) return res.status(400).json({ msg: "User name or password incorrect " });
+      
+          let token = jwt.sign({ id: user._id }, process.env.jwt_secret);
+          res.json({
+            token,
+            user: {
+              id: user._id,
+              actualName: user.actualName,
+              email:user.email
+            },
+          });
+        } catch (err) {
+          res.status(500).json({ error: err.message });
+        }
+      });
+      router.delete("/delete", Permission, async (req, res) => {
+        try {
+          let deletedUser = await User.findByIdAndDelete(req.user);
+          res.json(deletedUser);
+        } catch (err) {
+          res.status(500).json({ error: err.message });
+        }
+
+      });
+      router.post("/validatedToken", async (req, res) => {
+        try {
+          let token = req.header("x-auth-token");
+          if (!token) return res.json(false);
+      
+          let validated = jwt.verify(token, process.env.jwt_secret);
+          if (!validated) return res.json(false);
+      
+          const user = await User.findById(validated.id);
+          if (!user) return res.json(false);
+      
+          return res.json(true);
+        } catch (err) {
+          res.status(500).json({ error: err.message });
+        }
+      });
+      
 
 module.exports = router;
