@@ -1,8 +1,10 @@
 import React from 'react'
 import "./Product.css";
 import { useStateValue } from "./SessionState";
+import { Link } from 'react-router-dom';
 function Product({id,name,cost,stars,image}) {
     let [{ cart }, path] = useStateValue();
+  
    //console.log(cart);
 
 //    if(cart.length !== 0){  
@@ -27,16 +29,18 @@ function Product({id,name,cost,stars,image}) {
     };
     return (
         <div className="product">
+          
             <div className="infoProd">
-                <p className="prodTittle">{name}</p>
+            <Link to="/shop" style={{ textDecoration: 'none',color:'black' }}><p className="prodTittle">{name}</p>
                 <p className="prodPrice"><small>£</small><strong>{cost}</strong></p>
                 <div className="prodRating"><p> {"⭐".repeat(stars)}</p>
                
-                 </div>
+                 </div></Link>
 
                 </div>
                 <img src={image} alt='#' />
                 <button onClick={addToBasket}>Add to Basket</button>
+          
             </div>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useState }  from 'react'
+import React, { useState }    from 'react'
 import { Link, useHistory  } from 'react-router-dom';
 import './Login.css';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
@@ -6,19 +6,16 @@ import LockIcon from '@material-ui/icons/Lock';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import { Grid } from '@material-ui/core';
-import { useStateValue } from "./SessionState";
+
 
 function Login() {
     let[username,userEmail]=useState('');
     let[password,userPassword]=useState('');
-    const [userDetails, setUserDetails] = useState({
-        token: undefined,
-        user: undefined,
-      });
+    
     
     let signIn = e => {
         e.preventDefault();
-
+        // sign in functionality will go here for login 
       
     }
 

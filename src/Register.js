@@ -12,7 +12,7 @@ function Register() {
 
     let register = e => {
         e.preventDefault();
-
+        //register functionality will fo here for login 
         
     }
     return (

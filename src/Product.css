@@ -12,12 +12,18 @@
   z-index: 1;
 }
 .product > img {
-  max-height: 200px;
-  width: 100%;
-  object-fit: contain;
-  margin-bottom: 15px;
+  max-height: 200px !important;
+  width: 100% !important;
+  object-fit: contain !important;
+  margin-bottom: 15px !important;
 }
-
+/* .imageLink {
+  
+  max-height: 200px !important;
+  width: 100% !important;
+  object-fit: contain !important;
+  margin-bottom: 15px !important;
+} */
 .product > button {
   background: #f0c14b;
   border: 1px solid;

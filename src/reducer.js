@@ -7,7 +7,7 @@ export let initialState = {
  
     switch (action.type) {
          case "removeFromCart":
-      const index = state.cart.findIndex(
+      let index = state.cart.findIndex(
         (cartItem) => cartItem.id === action.id
       ); 
       let newCart= [...state.cart];
@@ -30,9 +30,19 @@ export let initialState = {
           ...state,
           cart: [...state.cart, action.item],
         };
-      default:
-          return state
-        }
+        
+         // event listener for set user here
+         case "setUser":
+          return {
+            ...state,
+            user: action.user
+          }
+    
+        default:
+          return state;
+      }
+      
+       
     };
   export const getPriceTotal = (cart) => 
   cart?.reduce((initialval, item) => item.cost + initialval, 0);

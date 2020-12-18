@@ -102,6 +102,14 @@ router.post("/register", async (req, res) => {
           res.status(500).json({ error: err.message });
         }
       });
-      
+      router.get("/", Permission, async (req, res) => {
+        let user = await User.findById(req.user);
+        
+        res.json({
+            actualName: user.actualName,
+            id: user._id,
+        });
+     
+      });
 
 module.exports = router;

@@ -119,3 +119,8 @@ span {
   align-items: center;
   color: black;
 }
+
+.iconStyle {
+  color: black;
+  text-decoration: none; /* no underline */
+}
