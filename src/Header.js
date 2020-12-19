@@ -15,6 +15,7 @@ import StoreIcon from '@material-ui/icons/Store';
 import HomeIcon from '@material-ui/icons/Home';
 import BookIcon from '@material-ui/icons/Book';
 import { useStateValue } from "./SessionState";
+import AuthOptions from './authentication';
 function Header() {
   let [{ cart }, path] = useStateValue();
 
@@ -85,9 +86,10 @@ function Header() {
                 <Link to="/buy">
                 <span className="headerRightOption"><ShoppingBasketIcon/></span> 
                 </Link>
-                <Link to="/login">
+                <AuthOptions/>
+                {/* <Link to="/login">
                 <span className="headerRightOption"><AccountCircleIcon/></span>
-                </Link>
+                </Link> */}
                 <span className="headerRightOption"><SettingsIcon/></span>
                 </div>
                 

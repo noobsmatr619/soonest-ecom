@@ -15,40 +15,37 @@ import Axios from "axios";
 
 import ChatPage from "./ChatPage";
 function App() {
-  let [{userDetails}, setUserDetails] = useState({
-    token: undefined,
+  const [userDetails, setUserDetails] = useState({
+    secretCode: undefined,
     user: undefined,
   });
 
   useEffect(() => {
-    let existingLog = async () => {
-      let secretCode= localStorage.getItem("auth-token");
+    const userLoggedIn = async () => {
+      let secretCode = localStorage.getItem("auth-token");
       if (secretCode === null) {
         localStorage.setItem("auth-token", "");
         secretCode = "";
       }
-      let secretCodeResults = await Axios.post(
-        "http://localhost:5000/users/validatedToken",
+      const secretCodeRes = await Axios.post(
+        "http://localhost:9000/users/validatedToken",
         null,
         { headers: { "x-auth-token": secretCode } }
       );
- //    console.log(secretCode)
-    // console.log(secretCode.data)
-      if (secretCodeResults.data) {
-        let  userBool = await Axios.get("http://localhost:5000/users/", {
+      if (secretCodeRes.data) {
+        const userRes = await Axios.get("http://localhost:9000/users/", {
           headers: { "x-auth-token": secretCode },
         });
-        //console.log(secretCode)
         setUserDetails({
           secretCode,
-          user: userBool.data,
+          user: userRes.data,
         });
-     //  console.log(userBool)
       }
     };
 
-    existingLog();
+    userLoggedIn();
   }, []);
+
   return (
    
 

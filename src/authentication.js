@@ -1,11 +1,11 @@
-import React,{ useContext }  from 'react'
+import React,{ useContext,useState }  from 'react'
 import { useHistory } from "react-router-dom";
 import UserContext from "./context/UserContext";
-
+import { Link } from 'react-router-dom';
 // userDetails, setUserDetails de structure
-
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 export default function AuthOptions() {
-let {userDetails, setUserDetails}= useContext(UserContext);
+let { userDetails, setUserDetails }= useContext(UserContext);
 let history = useHistory();
 let register = () => history.push("/register");
 let login = () => history.push("/login");
@@ -19,11 +19,14 @@ let login = () => history.push("/login");
   return (
     <nav className="auth-options">
       {userDetails.user ? (
-        <button onClick={logout}>Log out</button>
+         <Link to="/account">
+         <span className="headerRightOption"><AccountCircleIcon/></span>
+         </Link> 
       ) : (
         <>
-          <button onClick={register}>Register</button>
-          <button onClick={login}>Log in</button>
+          <Link to="/login">
+                <span className="headerRightOption"><AccountCircleIcon/></span>
+                </Link> 
         </>
       )}
     </nav>
