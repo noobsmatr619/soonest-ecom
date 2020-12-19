@@ -124,3 +124,10 @@ span {
   color: black;
   text-decoration: none; /* no underline */
 }
+
+.headerRightOptionAut {
+  padding-left: 0px !important;
+  padding-right: 5px !important ;
+  color: black;
+  margin-left: 0px !important ;
+}

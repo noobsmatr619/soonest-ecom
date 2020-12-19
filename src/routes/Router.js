@@ -24,7 +24,7 @@ router.post("/register", async (req, res) => {
             .json({ msg: "Please retype Confirm password and make sure it is same as password above" });
     
         let pastUser = await User.findOne({ email: email });
-        console.log(pastUser )
+      //  console.log(pastUser )
         if (pastUser)
           return res
             .status(400)
@@ -70,7 +70,7 @@ router.post("/register", async (req, res) => {
             user: {
               id: user._id,
               actualName: user.actualName,
-              email:user.email
+               email:user.email
             },
           });
         } catch (err) {

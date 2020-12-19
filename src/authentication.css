@@ -1,0 +1,41 @@
+.headerRightOptionAut {
+  padding-left: 0pm !important;
+}
+.dropdown {
+  position: absolute;
+  top: 58px;
+  max-width: 150px;
+  transform: translateX(-45%);
+  background-color: var(--bg);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  overflow: hidden;
+  transition: height var(--speed) ease;
+  background-color: red;
+  text-decoration: none;
+  border-radius: 15px;
+  right: 1;
+  transition: 350ms;
+}
+
+.dropdown.showing {
+  display: none;
+}
+.menu-item {
+  max-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 25px;
+  transition: background var(--speed);
+  padding: 0.5rem;
+  list-style-type: none;
+}
+
+.accountShow {
+  color: black;
+}
+.logOutShow {
+  color: black;
+}
