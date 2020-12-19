@@ -16,12 +16,16 @@ function Register() {
     let [confirmPassword, setconfirmPassword] = useState();
     let [actualName, setactualName] = useState(); 
     let [passwordShown, setPasswordShown] = useState(false);
-    //let [checkPasswordShown, chekcSetPasswordShown] = useState(false);
-    let { setUserData } = useContext(UserContext);
     let togglePasswordVisiblity = () => {
         setPasswordShown(passwordShown ? false : true);
       };
-
+    //let [checkPasswordShown, chekcSetPasswordShown] = useState(false);
+  
+    //let  {setUserData}  = useContext(UserContext);
+    const [userDetails, setUserDetails] = useState({
+        secretCode: undefined,
+        user: undefined,
+      });
       
 
 
@@ -38,17 +42,25 @@ function Register() {
               email,
               password,
             });
-            console.log("i was here ")
-            setUserData({
-                secretCode: loginRes.data.secretCode,
+
+            // let [userDetails, setUserDetails] = useState({
+            //     secretCode: undefined,
+            //     user: undefined,
+            //   });
+
+           
+            setUserDetails({
+                
+              secretCode: loginRes.data.token,
               user: loginRes.data.user,
-            });
-            localStorage.setItem("auth-token", loginRes.data.secretCode);
+             });
+           // console.log("i am herer")
+            localStorage.setItem("auth-token", loginRes.data.token);
             history.push("/");
           } catch (err) {
             console.log(err);
           }
-    }
+    };
     return (
         <div className="register">
               

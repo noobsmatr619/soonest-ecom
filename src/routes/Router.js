@@ -53,7 +53,7 @@ router.post("/register", async (req, res) => {
       
        
           if (!email || !password)
-            return res.status(400).json({ msg: "Full up all the fields" });
+            return res.status(400).json({ msg: "Fill up all the fields" });
       
           let user = await User.findOne({ email: email });
           if (!user)
@@ -70,7 +70,7 @@ router.post("/register", async (req, res) => {
             user: {
               id: user._id,
               actualName: user.actualName,
-               email:user.email
+              // email:user.email
             },
           });
         } catch (err) {
