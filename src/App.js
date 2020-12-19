@@ -1,5 +1,5 @@
   
-import React, { useEffect } from "react";
+import React, { useEffect,useState} from "react";
 import './ChatBox.css';
 import Header from "./Header";
 import { BrowserRouter as Router,Switch,Route} from 'react-router-dom';
@@ -15,7 +15,7 @@ import Axios from "axios";
 
 import ChatPage from "./ChatPage";
 function App() {
-  let [{userDetails}, setUserDetails] = useStateValue({
+  let [{userDetails}, setUserDetails] = useState({
     token: undefined,
     user: undefined,
   });
