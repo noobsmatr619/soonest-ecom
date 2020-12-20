@@ -9,6 +9,8 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import { Grid } from '@material-ui/core';
 import { useStateValue } from "./SessionState";
 import UserContext from './context/UserContext';
+import ErrorShow from "./ErrorShow";
+
 function Register() {
     let history = useHistory();
     let [email, setEmail] = useState();
@@ -19,6 +21,7 @@ function Register() {
     let togglePasswordVisiblity = () => {
         setPasswordShown(passwordShown ? false : true);
       };
+      let [error, setError] = useState();
     //let [checkPasswordShown, chekcSetPasswordShown] = useState(false);
   
     let  {setUserDetails}  = useContext(UserContext);
@@ -54,15 +57,18 @@ function Register() {
             
             history.push("/");
           } catch (err) {
-            console.log(err);
+            err.response.data.msg && setError(err.response.data.msg);
           }
     };
     return (
         <div className="register">
-              
+       
            <Link to='/'>
                 <img className="loginHeaderLogo"src="/Image/logo.png" alt='#'/>   
             </Link>
+            {error && (
+        <ErrorShow  message={error} clearError={() => setError(undefined)} />
+      )}
         <div className="signUp">
      
         <form className="loginForm" onSubmit={registerUser}>

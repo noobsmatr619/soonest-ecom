@@ -68,7 +68,7 @@ mongoose.connection.on('connected',()=>{
   })
 //api
 
-app.get("/",(req,res)=>res.status(200).send('hello world'))  ;
+app.get("/",(req,res)=>res.status(200).send('Hello, Nothing to see here :P,Type in http://localhost:3000/ to get to the App'))  ;
 
 app.get("/chats/sync",(req,res)=>{
     // eslint-disable-next-line array-callback-return
@@ -101,3 +101,5 @@ chats.create(dbChats,(error,data)=>{
 app.listen(port,()=>console.log(` listening on localhost:${port}`));
 
 app.use("/users", require("./routes/Router"));
+
+app.use("/blogs", require("./routes/BlogRoute"))

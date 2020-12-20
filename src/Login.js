@@ -8,6 +8,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import { Grid } from '@material-ui/core';
 import UserContext from './context/UserContext';
+import ErrorShow from './ErrorShow';
 
 function Login() {
     let [email, setEmail] = useState();
@@ -21,6 +22,7 @@ function Login() {
     let togglePasswordVisiblity = () => {
         setPasswordShown(passwordShown ? false : true);
       };
+      let [error, setError] = useState();
     let signIn = async (e) => {
         e.preventDefault();
         try {
@@ -36,8 +38,8 @@ function Login() {
           localStorage.setItem("auth-token", loginRes.data.secretCode);
           history.push("/");
         } catch (err) {
-            console.log(err)
-        //  err.response.data.msg && setError(err.response.data.msg);
+           
+            err.response.data.msg && setError(err.response.data.msg);
         }
       };
 
@@ -49,6 +51,9 @@ function Login() {
            <Link to='/'>
                 <img className="loginHeaderLogo"src="/Image/logo.png" alt='#'/>   
             </Link>
+            {error && (
+        <ErrorShow  message={error} clearError={() => setError(undefined)} />
+      )}
             <div  className="signIn">
                <form className="loginForm" onSubmit={signIn } >
                <h1>Sign in</h1>

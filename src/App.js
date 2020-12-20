@@ -14,6 +14,7 @@ import ProductShow from './ProductShow';
 import Axios from "axios";
 
 import ChatPage from "./ChatPage";
+import Blog from "./Blog";
 function App() {
   const [userDetails, setUserDetails] = useState({
     secretCode: undefined,
@@ -78,6 +79,12 @@ function App() {
       <Route path="/shop">
       
       <ProductShow/>
+  
+      </Route>
+
+      <Route path="/blog">
+      <Header />
+      <Blog/>
   
       </Route>
       <Route path="/">

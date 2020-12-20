@@ -68,8 +68,8 @@ function Header() {
                     <span className="headerOptLineTwo">Shop </span>
                 </div>
                  <div className='headerLeftOpt  '>
-                    <span className="headerOptTLineOne"><BookIcon/></span><br/>
-                    <span className="headerOptLineTwo"> Blog</span>
+                 <Link to="/blog" className="iconStyle"> <span className="headerOptTLineOne"><BookIcon/></span><br/>
+                   <span className="headerOptLineTwo"> Blog</span> </Link>
                 </div>
                 
                 </div>

@@ -28,3 +28,18 @@
   width: 100px;
   object-fit: contain;
 }
+
+.errorShow {
+  display: flex;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border: 1px solid #e07c7c;
+  border-radius: 8px;
+
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8d6d6;
+}
+
+.errorIcon {
+}

@@ -111,5 +111,8 @@ router.post("/register", async (req, res) => {
         });
      
       });
+      router.get("/test", async (req, res) => {
+        res.send("user")
+       });
 
 module.exports = router;
