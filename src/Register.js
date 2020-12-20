@@ -21,15 +21,10 @@ function Register() {
       };
     //let [checkPasswordShown, chekcSetPasswordShown] = useState(false);
   
-    //let  {setUserData}  = useContext(UserContext);
-    const [userDetails, setUserDetails] = useState({
-        secretCode: undefined,
-        user: undefined,
-      });
-      
-
-
-    let registerUser = async (e)  => {
+    let  {setUserDetails}  = useContext(UserContext);
+    // const [userDetails, setUserDetails] = useState({      
+    //   });
+      let registerUser = async (e)  => {
         e.preventDefault();
        
         try {
@@ -54,8 +49,9 @@ function Register() {
               secretCode: loginRes.data.token,
               user: loginRes.data.user,
              });
-           // console.log("i am herer")
+            console.log("i am herer")
             localStorage.setItem("auth-token", loginRes.data.token);
+            
             history.push("/");
           } catch (err) {
             console.log(err);
