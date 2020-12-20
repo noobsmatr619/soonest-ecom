@@ -15,7 +15,7 @@ function Login() {
    // let [error, setError] = useState();
    // let[username,userEmail]=useState('');
     //let[password,userPassword]=useState('');
-    let { setUserData } = useContext(UserContext);
+    let {  setUserDetails } = useContext(UserContext);
     let history = useHistory();
     let [passwordShown, setPasswordShown] = useState(false);
     let togglePasswordVisiblity = () => {
@@ -27,7 +27,7 @@ function Login() {
           let loginUser = { email, password };
           let loginRes = await Axios.post("http://localhost:9000/users/login",loginUser);
           //console.log("i was here")
-          setUserData({
+          setUserDetails({
             secretCode: loginRes.data.secretCode,
             user: loginRes.data.user,
           });
