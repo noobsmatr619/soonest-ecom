@@ -9,3 +9,9 @@ install:
 - npm install chai
 - npm install chai-http
 - npm install express
+- npm ci
+script:
+-npm run lint
+-npm run test:coveralls
+notification:
+  email:false
