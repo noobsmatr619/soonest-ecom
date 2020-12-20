@@ -42,7 +42,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test:coverage":"jest --coverage && coveralls < coverage/lcov.info"
+    // "test:coverage":"jest --coverage && coveralls < coverage/lcov.info"
   },
   "eslintConfig": {
     "extends": [
