@@ -2,30 +2,45 @@ let ProductRouter = require("express").Router();
 let Prod = require("../Schemas/productSchema");
 
 ProductRouter .post("/prod", async (req, res) => {
-  let { title, marker} = req.body;
+//    name: { type: String, required: true, unique: true },
+//     image: { type: String, required: true },
+//     description: { type: String, required: true },
+//     price: { type: Number, required: true },
+//     countInStock: { type: Number, required: true },
+//     rating: { type: Number,default:false, required: true },
+//     numReviews: { type: Number,default:false, required: true },
+//     reviews: [reviewSchema],
+  let { name, image,description,price, countInStock,rating,numReviews,reviews} = req.body;
 
-  if (!title || !marker)
+  if (!name||  !image|| !description|| !price|| !countInStock|| !rating||!numReviews||!reviews)
     return res
       .status(400)
-      .json({ msg: "title and text both needed." });
+      .json({ msg: "All the recquired fields are need to filled " });
 
   try {
-    let newproduct= newproduct({
-      title,
-      marker
+    let newproduct= new Product({
+    title,
+    name,
+    image,
+    description,
+    price,
+    countInStock,
+    rating,
+    numReviews,
+    review
     });
 
-    let savedproduct= await newBlog.save();
-    res.json(savedBlog);
+    let savedproduct= await newproduct.save();
+    res.json(savedproduct);
   } catch (err) {
     res.status(500).json({ err });
   }
 });
 
-ProductRouter .get("/blog", async (req, res) => {
+ProductRouter .get("/prod", async (req, res) => {
   try {
-    letproducts = awaitproduct.find();
-    res.json(blogs);
+    let products = awaitproduct.find();
+    res.json(products);
   } catch (err) {
     res.status(500).json({ err });
   }
@@ -41,7 +56,7 @@ ProductRouter .get("/single/:id", async (req, res) => {
 });
 
 ProductRouter .get("/test", async (req, res) => {
-   res.send("blogging")
+   res.send("works prod")
   });
 
 module.exports = ProductRouter ;
