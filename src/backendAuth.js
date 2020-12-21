@@ -102,4 +102,6 @@ app.listen(port,()=>console.log(` listening on localhost:${port}`));
 
 app.use("/users", require("./routes/Router"));
 
-app.use("/blogs", require("./routes/BlogRoute"))
+app.use("/blogs", require("./routes/BlogRoute"));
+
+app.use("/products", require("./routes/ProductRouter"))
