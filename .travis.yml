@@ -10,6 +10,7 @@ install:
 - npm ci
 script:
 - npm test 
+# change this to actual tests later
 
 notifications:
-  email: false
+  email: true
