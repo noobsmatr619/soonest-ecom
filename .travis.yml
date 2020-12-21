@@ -3,7 +3,7 @@ node_js:
 - node
 install:
 - npm install express
-- npm ci
+- npm install
 script:
 - npm start
 
