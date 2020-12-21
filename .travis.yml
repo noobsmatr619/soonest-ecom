@@ -6,6 +6,7 @@ install:
 - npm install chai
 - npm install chai-http
 - npm install express
+- travis_wait 30 mvn install
 - npm ci
 script:
 - npm start
