@@ -9,7 +9,7 @@ install:
 - npm install express
 - npm ci
 script:
-- npm test `--passWithNoTests`
+- npm test 
 
 notifications:
   email: false
