@@ -8,7 +8,8 @@ install:
 - npm install chai-http
 - npm install express
 - npm ci
-
+script:
+- npm test --passWithNoTests
 
 notifications:
   email: false
