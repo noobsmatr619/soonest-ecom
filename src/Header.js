@@ -29,7 +29,7 @@ function Header() {
         <nav className={sidebarHandler ? 'nav-menu showing' : 'nav-menu'}>
         <ul className="navMenuList" onClick={slideSidebar}>
             <li className="navbar-toggle">
-            <IconButton className="menuClosIcon"><CloseIcon/></IconButton>
+            <IconButton ><CloseIcon className="menuClosIcon"/></IconButton>
 
             </li>
            

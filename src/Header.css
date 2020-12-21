@@ -1,6 +1,6 @@
 .header {
 
-  background-color: red;
+  background-color:#4501ca;
   height: 80px;
   display: flex;
   justify-content: flex-start;
@@ -132,4 +132,6 @@ span {
   color: black;
   margin-left: 0px !important ;
 }
-
+.menuClosIcon{
+  color: #f5f5f5;
+}
