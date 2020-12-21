@@ -40,8 +40,24 @@ BlogRouter.get("/single/:id", async (req, res) => {
   }
 });
 
+ BlogRouter.delete("/blogdelete",async (req, res) => {
+        try {
+          let deletedBlog = await product.findByIdAndDelete(req.user);
+          res.json(deletedBlog);
+        } catch (err) {
+          res.status(500).json({ error: err.message });
+        }
+
+      });
+
+
+
+
 BlogRouter.get("/test", async (req, res) => {
    res.send("blogging")
   });
+
+
+
 
 module.exports = BlogRouter;

@@ -48,12 +48,24 @@ ProductRouter .get("/prod", async (req, res) => {
 
 ProductRouter .get("/single/:id", async (req, res) => {
   try {
-    letproduct = awaitproduct.findById(req.params.id);
+    letproduct = await product.findById(req.params.id);
     res.json(blog);
   } catch (err) {
     res.status(500).json({ err });
   }
 });
+ ProductRouter.delete("/proddelete",async (req, res) => {
+        try {
+          let deletedproduct = await product.findByIdAndDelete(req.user);
+          res.json(deletedproduct);
+        } catch (err) {
+          res.status(500).json({ error: err.message });
+        }
+
+      });
+
+
+
 
 ProductRouter .get("/test", async (req, res) => {
    res.send("works prod")
