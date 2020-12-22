@@ -1,6 +1,6 @@
 
 import React from 'react'
-import  SimpleSlider   from '../../Assets/Slider';
+import  SimpleSlider   from './Slider';
 import Product from "./Product";
 
  import './Home.css'

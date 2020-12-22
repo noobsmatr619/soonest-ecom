@@ -27,17 +27,15 @@ function Login() {
         e.preventDefault();
         try {
           let loginUser = { email, password };
-          console.log(loginUser)
-         // debugger;
           let loginRes = await Axios.post("http://localhost:9000/users/login",loginUser);
           //console.log("i was here")
           setUserDetails({
-            secretCode: loginRes.data.token,
+            secretCode: loginRes.data.secretCode,
             user: loginRes.data.user,
           });
           console.log(loginRes.data.secretCode)
           console.log(loginRes.data.user)
-          localStorage.setItem("auth-token", loginRes.data.token);
+          localStorage.setItem("auth-token", loginRes.data.secretCode);
           history.push("/");
         } catch (err) {
            
