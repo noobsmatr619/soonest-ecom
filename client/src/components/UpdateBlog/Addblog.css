@@ -1,0 +1,18 @@
+.addBlog {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  max-width: 100%;
+  max-height: 100%;
+  border: none;
+  -webkit-border-radius: 1px;
+  border-radius: 1px;
+  font: normal 16px/1 "Times New Roman", Times, serif;
+
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  -webkit-box-shadow: 7px 5px 18px 0 rgba(0, 2, 5, 0.91);
+  box-shadow: 7px 5px 18px 0 rgba(0, 2, 5, 0.91);
+  padding: 5%;
+  margin: 1%;
+}

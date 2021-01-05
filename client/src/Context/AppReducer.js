@@ -1,0 +1,147 @@
+import {
+  REGISTER_USER,
+  REGISTER_USER_FAIL,
+  LOGIN_USER,
+  LOGIN_USER_FAIL,
+  LOAD_USER,
+  LOGOUT_USER,
+  ADMIN_LOGIN,
+  LOAD_ADMIN,
+  ADD_PRODUCT,
+  GET_ALL_PRODUCTS,
+  GET_PRODUCT_BY_ID,
+  ADD_BLOG,
+  GET_ALL_BLOG,
+  GET_BLOG_BY_ID,
+  GET_BASKET,
+  GET_ADMIN,
+  GET_USER_BY_ID,
+  SEND_MESSAGE,
+  RECIVE_MESSAGE,
+  GET_ALL_USER,
+} from "./types";
+import { toast } from "react-toastify";
+
+/* eslint-disable import/no-anonymous-default-export */
+export default (state, action) => {
+  switch (action.type) {
+    case GET_ALL_USER:
+      return {
+        ...state,
+        users: action.payload,
+      };
+    case GET_USER_BY_ID:
+      return {
+        ...state,
+        userbyid: action.payload,
+      };
+    case SEND_MESSAGE:
+      return {
+        ...state,
+        sendmessage: action.payload,
+      };
+    case RECIVE_MESSAGE:
+      return {
+        ...state,
+        receivedmessage: action.payload,
+      };
+    case GET_ADMIN:
+      return {
+        ...state,
+        admin: action.payload,
+      };
+    case LOAD_ADMIN:
+      toast.success("Successfully Loaded");
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload,
+      };
+    case LOAD_USER:
+      toast.success("Successfully Loaded");
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload,
+      };
+    case REGISTER_USER:
+      localStorage.setItem("token", action.payload.token);
+      toast.success("Successfully registered");
+      return {
+        ...state,
+        ...action.payload,
+        isAuthenticated: true,
+      };
+    case LOGIN_USER:
+      localStorage.setItem("token", action.payload.token);
+      toast.success("Successfully Login");
+      return {
+        ...state,
+        ...action.payload,
+        isAuthenticated: true,
+      };
+    case ADMIN_LOGIN:
+      localStorage.setItem("token", action.payload.token);
+      toast.success("Successfully Login As Admin");
+      return {
+        ...state,
+        ...action.payload,
+        isAuthenticated: true,
+      };
+    case LOGOUT_USER:
+      localStorage.removeItem("token");
+      toast.success("Successfully Logout");
+      return {
+        ...state,
+        token: null,
+        user: null,
+        isAuthenticated: false,
+        cart: [],
+      };
+    case ADD_PRODUCT:
+      if (action.payload.success) {
+        toast.success("Product Add Successfully");
+      }
+      return {
+        ...state,
+      };
+    case GET_ALL_PRODUCTS:
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case GET_PRODUCT_BY_ID:
+      return {
+        ...state,
+        product: action.payload,
+      };
+    case ADD_BLOG:
+      if (action.payload.success) {
+        toast.success("Product Add Blog ");
+      }
+      return {
+        ...state,
+      };
+    case GET_BLOG_BY_ID:
+      return {
+        ...state,
+        blog: action.payload,
+      };
+    case GET_ALL_BLOG:
+      return {
+        ...state,
+        blogs: action.payload,
+      };
+    case GET_BASKET:
+      return {
+        ...state,
+        cart: action.payload,
+      };
+    case REGISTER_USER_FAIL:
+      return toast.error("Register FAIL Due to Some error");
+    case LOGIN_USER_FAIL:
+      return toast.error("Login FAIL Due to Some error");
+    default:
+      break;
+  }
+};
