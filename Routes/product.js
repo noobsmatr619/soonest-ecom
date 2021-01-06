@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const upload = require("../upload");
-const Product = require("../model/Product");
+const Product = require("../Model/Product");
 const auth = require("../middleware/auth");
 
 const config = require("config");
