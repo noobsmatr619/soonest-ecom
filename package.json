@@ -10,7 +10,7 @@
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "test": "mocha ./Test/Task.js --reporter mocha-junit-reporter --timeout 60000 --exit"
+    "test": "mocha Task.js --reporter mocha-junit-reporter --timeout 60000 --exit"
   },
   "keywords": [],
   "author": "",
