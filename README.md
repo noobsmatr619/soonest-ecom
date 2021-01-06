@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.com/noobsmatr619/soonest-ecom.svg?token=HdokGm7zE5bQRvrn3zBx&branch=master)](https://travis-ci.com/noobsmatr619/soonest-ecom)
