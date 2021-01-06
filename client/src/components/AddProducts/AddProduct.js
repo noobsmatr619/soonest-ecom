@@ -49,6 +49,7 @@ const AddProduct = () => {
       <form onSubmit={onSubmit}>
         <div className='addProd'>
           <h1 className='prodTitle'> Add product</h1>
+          <h4 className='prodTitle'> All the fields are recquired</h4>
           <h2 className='prodTitle'> Product Name</h2>
           <input
             name='name'

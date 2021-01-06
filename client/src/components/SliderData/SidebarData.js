@@ -4,7 +4,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import ShopIcon from "@material-ui/icons/Shop";
 import MessageIcon from "@material-ui/icons/Message";
 import StoreIcon from "@material-ui/icons/Store";
-
+import ListIcon from '@material-ui/icons/List';
 export let SidebarData = [
   {
     title: "Home",
@@ -34,7 +34,7 @@ export let SidebarData = [
   {
     title: "Wishlist",
     path: "/wishlist",
-    icon: <MessageIcon />,
+    icon: <ListIcon />,
     cName: "nav-text",
   },
 ];

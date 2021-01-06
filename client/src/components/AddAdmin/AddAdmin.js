@@ -19,7 +19,8 @@ const Example = () => {
   };
   return (
     <div className='container'>
-      <h3>Add Admin</h3>
+      <h1>Add Admin</h1>
+      <h4>Both fields are required</h4>
       <Form onSubmit={onSubmit}>
         <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
           <Label for='exampleEmail' className='mr-sm-2'>
@@ -30,7 +31,7 @@ const Example = () => {
             name='email'
             id='exampleEmail'
             onChange={inputHandler}
-            placeholder='something@idk.cool'
+            placeholder='email'
           />
         </FormGroup>
         <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
@@ -42,7 +43,7 @@ const Example = () => {
             name='password'
             onChange={inputHandler}
             id='examplePassword'
-            placeholder="don't tell!"
+            placeholder="password"
           />
         </FormGroup>
         {"   "}

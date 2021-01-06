@@ -14,10 +14,10 @@ const addProduct = {
     "image": "#",
     "star": 4,
     "category": "pet",
-    "size": "M",
-    "quantity": 2,
+    "size": "m",
+    "quantity": "2",
     "description": "testLorem",
-    "price": 2
+    "price": "2"
 }
 const addBlog = {
     "title": "test",

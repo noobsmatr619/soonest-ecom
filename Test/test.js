@@ -105,6 +105,23 @@ describe('Task', () => {
         }).timeout(10000);
 
     });
+    describe('Create a new Product', () => {
+        it('it should create product', (done) => {
+            chai.request(server)
+                .post(`/api/product/addproduct`)
+                .set('Content-Type', 'application/x-www-form-urlencoded')
+                .attach('image', '../client/public/Image/2b446580-4f9b-11eb-85cf-fdd9b03db24d.jpeg')
+                .set('x-auth-token', testData.AdminToken)
+                // .send(testData.addProduct)
+                .field('extra_info', testData.addProduct)
+                .end((err, response) => {
+                    console.log(response.body);
+                    response.should.have.status(200);
+                    done();
+                });
+        }).timeout(10000);
+
+    });
 
     describe('it should get the product list', () => {
         it('list all products sucessfully', (done) => {
