@@ -3,7 +3,7 @@ let chai = require("chai");
 let chaiHttp = require("chai-http");
 const { Mongoose } = require("mongoose");
 let server = require("../server");
-let testData = require('../test-data');
+let testData = require('./test-data');
 let productId = "";
 let blogId = "";
 chai.should();
