@@ -1,5 +1,5 @@
 language: node_js
-os: Mac OSX 
+os: linux
 node_js:
 - node
 install:
