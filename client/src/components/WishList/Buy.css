@@ -1,0 +1,23 @@
+.buy {
+  display: flex;
+  padding: 20px;
+  height: max-content;
+}
+
+.righBuy {
+  margin-left: auto;
+  order: 2;
+  padding-right: 5%;
+}
+
+.leftBuy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 600px;
+  min-height: 100px;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+}

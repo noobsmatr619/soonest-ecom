@@ -19,12 +19,51 @@ import {
   SEND_MESSAGE,
   RECIVE_MESSAGE,
   GET_ALL_USER,
+  RESET_PASSWORD,
+  EMPTY_CART,
+  ADD_TO_WISHLIST,
+  FILTER_PRODUCTS,
+  ALL_ORDER,
+  MODE,
 } from "./types";
 import { toast } from "react-toastify";
 
 /* eslint-disable import/no-anonymous-default-export */
 export default (state, action) => {
   switch (action.type) {
+    case MODE:
+      return {
+        ...state,
+        mode: !state.mode,
+      };
+    case FILTER_PRODUCTS:
+      let reg = new RegExp(action.payload, "gi");
+      console.log(action.payload);
+      console.log(reg);
+      return {
+        ...state,
+        products: state.searchproduct.filter(p => {
+          if (p.name.match(reg) || p.category.match(reg)) {
+            console.log(p);
+            return p;
+          }
+        }),
+      };
+    case ADD_TO_WISHLIST:
+      return {
+        ...state,
+        wishlist: action.payload,
+      };
+    case RESET_PASSWORD:
+      toast.success(action.payload.msg);
+      return {
+        ...state,
+      };
+    case ALL_ORDER:
+      return {
+        ...state,
+        order: action.payload,
+      };
     case GET_ALL_USER:
       return {
         ...state,
@@ -88,8 +127,16 @@ export default (state, action) => {
         ...action.payload,
         isAuthenticated: true,
       };
+
+    case EMPTY_CART:
+      localStorage.removeItem("cart");
+      return {
+        ...state,
+        cart: [],
+      };
     case LOGOUT_USER:
       localStorage.removeItem("token");
+      localStorage.removeItem("cart");
       toast.success("Successfully Logout");
       return {
         ...state,
@@ -108,6 +155,7 @@ export default (state, action) => {
     case GET_ALL_PRODUCTS:
       return {
         ...state,
+        searchproduct: action.payload,
         products: action.payload,
       };
     case GET_PRODUCT_BY_ID:

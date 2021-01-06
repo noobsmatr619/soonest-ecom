@@ -1,0 +1,91 @@
+.login {
+  background-color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+
+  overflow-y: hidden;
+}
+
+.loginHeaderLogo {
+  width: 100px;
+  object-fit: contain;
+}
+.signIn {
+  width: 300px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  padding: 20px;
+  visibility: visible;
+  transition: visibility 1s, opacity 0.5s linear;
+  opacity: 1;
+
+}
+.signIn > h1 {
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.signIn > form > h3 {
+  margin-bottom: 5px;
+}
+
+.signIn > form > h3 > input {
+  height: 30px;
+  margin-bottom: 10px;
+  background-color: white;
+  width: 98%;
+}
+
+.signIn > p {
+  margin-top: 15px;
+  font-size: 12px;
+}
+
+.SigninButton {
+  background: red;
+  border-radius: 2px;
+  width: 100%;
+  height: 30px;
+  border: 1px solid;
+  margin-top: 10px;
+  border-color: #a88734 #9c7e31 #846a29;
+}
+
+.SignupButton {
+  border-radius: 2px;
+  width: 100%;
+  height: 30px;
+  border: 1px solid;
+  margin-top: 10px;
+  border-color: darkgray;
+}
+
+.signUp {
+  width: 300px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  padding: 20px;
+  visibility: visible;
+  transition: visibility 1s, opacity 0.5s linear;
+  opacity: 1;
+
+}
+
+.icon {
+  padding: 10px;
+}
+
+.displaynone {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 1s, opacity 0.5s linear;
+}

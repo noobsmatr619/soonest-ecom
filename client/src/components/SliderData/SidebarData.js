@@ -13,14 +13,14 @@ export let SidebarData = [
     cName: "nav-text",
   },
   {
-    title: "Best Products",
-    path: "/recentproducts",
+    title: "Recent Brought",
+    path: "/recentbroughtproduct",
     icon: <ShopIcon />,
     cName: "nav-text",
   },
   {
     title: "Products",
-    path: "/product",
+    path: "/shop",
     icon: <StoreIcon />,
     cName: "nav-text",
   },
@@ -28,6 +28,12 @@ export let SidebarData = [
   {
     title: "Messages",
     path: "/chat",
+    icon: <MessageIcon />,
+    cName: "nav-text",
+  },
+  {
+    title: "Wishlist",
+    path: "/wishlist",
     icon: <MessageIcon />,
     cName: "nav-text",
   },

@@ -25,9 +25,19 @@ export const GET_BLOG_BY_ID = "GET_BLOG_BY_ID";
 export const ADD_ADMIN = "ADD_ADMIN";
 //
 export const GET_BASKET = "GET_BASKET";
+export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 
 //Admin
 export const GET_ADMIN = "GET_ADMIN";
 //Message
 export const RECIVE_MESSAGE = "RECIVE_MESSAGE";
 export const SEND_MESSAGE = "SEND_MESSAGE";
+//resetpassword
+export const RESET_PASSWORD = "RESET_PASSWORD";
+
+export const EMPTY_CART = "EMPTY_CART";
+export const FILTER_PRODUCTS = "FILTER_PRODUCTS";
+//Add
+export const ALL_ORDER = "ALL_ORDER";
+//Add
+export const MODE = "MODE";

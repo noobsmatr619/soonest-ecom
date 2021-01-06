@@ -26,6 +26,12 @@ import {
   GET_ALL_USER,
   RECIVE_MESSAGE,
   SEND_MESSAGE,
+  RESET_PASSWORD,
+  EMPTY_CART,
+  ADD_TO_WISHLIST,
+  FILTER_PRODUCTS,
+  ALL_ORDER,
+  MODE,
 } from "./types";
 
 const AppState = props => {
@@ -42,9 +48,62 @@ const AppState = props => {
     admin: [],
     userbyid: null,
     users: [],
+    wishlist: [],
+    searchproduct: [],
+    order: [],
+    mode: true,
   };
   const [state, dispatch] = useReducer(AppReducer, initialState);
-
+  const switchMode = async () => {
+    dispatch({ type: MODE });
+  };
+  const getAllOrder = async () => {
+    try {
+      console.log("runngin order");
+      let res = await axios.get(`${APIs}/api/order`);
+      console.log(res);
+      dispatch({
+        type: ALL_ORDER,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const filterproducts = val => {
+    dispatch({ type: FILTER_PRODUCTS, payload: val });
+  };
+  const emptyCart = () => {
+    dispatch({
+      type: EMPTY_CART,
+    });
+  };
+  const resetPassword = async form => {
+    try {
+      console.log("Acton RUn");
+      const res = await axios.post(`${APIs}/api/user/reset-password`, form);
+      dispatch({
+        type: RESET_PASSWORD,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log("here");
+      console.log(error);
+    }
+  };
+  const changePassword = async (form, token) => {
+    try {
+      let Form = {
+        password: form.password,
+        token: token,
+      };
+      const res = await axios.post(`${APIs}/api/user/new-password`, Form);
+      toast.success(res.data.msg);
+    } catch (error) {
+      console.log("here");
+      console.log(error);
+    }
+  };
   const getUserByID = async id => {
     try {
       const res = await axios.get(`${APIs}/api/user/get/${id}`);
@@ -134,7 +193,7 @@ const AppState = props => {
   //LOGIN_USER
   const loginUser = async user => {
     try {
-      let res = await axios.post(`${APIs}/api/admin/login`, user);
+      let res = await axios.post(`${APIs}/api/user/login`, user);
       dispatch({
         type: LOGIN_USER,
         payload: res.data,
@@ -299,6 +358,15 @@ const AppState = props => {
       payload: cart,
     });
   };
+  const getWishlist = () => {
+    let cart = localStorage.getItem("wishlist");
+    cart = JSON.parse(cart);
+
+    dispatch({
+      type: ADD_TO_WISHLIST,
+      payload: cart,
+    });
+  };
   const getAuthBasket = async () => {
     const config = {
       headers: {
@@ -332,8 +400,32 @@ const AppState = props => {
       payload: cart3,
     });
   };
+  const removeFromWishlist = products => {
+    let wishlist = localStorage.getItem("wishlist");
+    let parseCart = JSON.parse(wishlist);
+    parseCart = parseCart.filter(c => c._id !== products._id);
+    let unparse = JSON.stringify(parseCart);
+    localStorage.setItem("wishlist", unparse);
+    let cart2 = localStorage.getItem("wishlist");
+    let cart3 = JSON.parse(cart2);
+    console.log(cart3);
+    dispatch({
+      type: ADD_TO_WISHLIST,
+      payload: cart3,
+    });
+  };
   const addToBasket = products => {
     let cart = localStorage.getItem("cart");
+    let wishlist = localStorage.getItem("wishlist");
+    if (wishlist === "" || wishlist === null) {
+      return "";
+    } else {
+      let wishlist = localStorage.getItem("wishlist");
+      let parseCart = JSON.parse(wishlist);
+      parseCart = parseCart.filter(c => c._id !== products._id);
+      let unparse = JSON.stringify(parseCart);
+      localStorage.setItem("wishlist", unparse);
+    }
     console.log(cart);
     if (cart === "" || cart === null) {
       let arr = [];
@@ -354,10 +446,40 @@ const AppState = props => {
       type: GET_BASKET,
       payload: cart3,
     });
+    let wishlist2 = localStorage.getItem("wishlist");
+    let wishlist3 = JSON.parse(wishlist2);
+    console.log(wishlist3);
+    dispatch({
+      type: ADD_TO_WISHLIST,
+      payload: wishlist3,
+    });
+  };
+
+  const addToWishlist = products => {
+    let wishlist = localStorage.getItem("wishlist");
+    console.log(wishlist);
+    if (wishlist === "" || wishlist === null) {
+      let arr = [];
+      arr.push(products);
+      let product = JSON.stringify(arr);
+      localStorage.setItem("wishlist", product);
+    } else {
+      let wishlist = localStorage.getItem("wishlist");
+      let parseCart = JSON.parse(wishlist);
+      parseCart.push(products);
+      let unparse = JSON.stringify(parseCart);
+      localStorage.setItem("wishlist", unparse);
+    }
+    let cart2 = localStorage.getItem("wishlist");
+    let cart3 = JSON.parse(cart2);
+    console.log(cart3);
+    dispatch({
+      type: ADD_TO_WISHLIST,
+      payload: cart3,
+    });
   };
   const addAuthToBasket = async products => {
     let cart = localStorage.getItem("cart");
-    console.log(cart);
     if (cart === "" || cart === null) {
       console.log("here");
       const config = {
@@ -368,7 +490,6 @@ const AppState = props => {
       let arr = [];
       arr.push(products);
       let product = JSON.stringify(arr);
-      console.log(product);
       let res = await axios.post(`${APIs}/api/cart/add`, product, config);
       product = JSON.stringify(res.data);
       // debugger;
@@ -395,6 +516,53 @@ const AppState = props => {
       payload: cart3,
     });
   };
+  const addAuthToWishlist = async products => {
+    let cart = localStorage.getItem("wishlist");
+    if (cart === "" || cart === null) {
+      console.log("here");
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let arr = [];
+      arr.push(products);
+      let product = JSON.stringify(arr);
+      console.log(product);
+      let res = await axios.post(
+        `${APIs}/api/cart/wishlist/add`,
+        product,
+        config
+      );
+      product = JSON.stringify(res.data);
+      // debugger;
+      localStorage.setItem("wishlist", product);
+    } else {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let cart = localStorage.getItem("wishlist");
+      let parseCart = JSON.parse(cart);
+      parseCart.push(products);
+      let unparse = JSON.stringify(parseCart);
+      let res = await axios.post(
+        `${APIs}/api/cart/wishlist/add`,
+        unparse,
+        config
+      );
+      unparse = JSON.stringify(res.data);
+      localStorage.setItem("wishlist", unparse);
+    }
+    let cart2 = localStorage.getItem("wishlist");
+    let cart3 = JSON.parse(cart2);
+    console.log(cart3);
+    dispatch({
+      type: ADD_TO_WISHLIST,
+      payload: cart3,
+    });
+  };
   const removeAuthFromCart = async products => {
     const config = {
       headers: {
@@ -416,6 +584,30 @@ const AppState = props => {
       payload: cart3,
     });
   };
+  const removeAuthFromWishlist = async products => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    let wishlist = localStorage.getItem("wishlist");
+    let parseCart = JSON.parse(wishlist);
+    parseCart = parseCart.filter(c => c._id !== products._id);
+    let unparse = JSON.stringify(parseCart);
+    let res = await axios.post(
+      `${APIs}/api/cart/wishlist/add`,
+      unparse,
+      config
+    );
+    unparse = JSON.stringify(res.data);
+    localStorage.setItem("wishlist", unparse);
+    let cart2 = localStorage.getItem("wishlist");
+    let cart3 = JSON.parse(cart2);
+    dispatch({
+      type: ADD_TO_WISHLIST,
+      payload: cart3,
+    });
+  };
   //LOGOUT
   const logOut = () => {
     dispatch({ type: LOGOUT_USER });
@@ -433,6 +625,10 @@ const AppState = props => {
         admin: state.admin,
         userbyid: state.userbyid,
         users: state.users,
+        wishlist: state.wishlist,
+        searchproduct: state.searchproduct,
+        order: state.order,
+        mode: state.mode,
         registerUser,
         loginUser,
         loadUser,
@@ -459,6 +655,17 @@ const AppState = props => {
         getUserByID,
         sendMessage,
         getAllUser,
+        resetPassword,
+        changePassword,
+        emptyCart,
+        addToWishlist,
+        removeFromWishlist,
+        getWishlist,
+        addAuthToWishlist,
+        removeAuthFromWishlist,
+        filterproducts,
+        getAllOrder,
+        switchMode,
       }}
     >
       {props.children}

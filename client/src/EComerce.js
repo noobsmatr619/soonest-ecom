@@ -14,11 +14,17 @@ import AddProduct from "./components/AddProducts/AddProduct";
 import AddedProduct from "./components/AddedProduct/AddedProduct";
 import UpdateProduct from "./components/UpdateProduct/UpdateProduct";
 import BlogShow from "./components/BlogShow/BlogShow";
+import ClientBlog from "./components/ClientBlog/ClientBlog";
 import Addblog from "./components/AddBlog/Addblog";
 import UpdateBlog from "./components/UpdateBlog/UpdateBlog";
 import AddAdmin from "./components/AddAdmin/AddAdmin";
 import ParticipantPanel from "./components/ChatApp/Components/ParticipantPanel/ParticipantPanel";
+import ResetPassword from "./components/Reset/Reset";
+import NewPassword from "./components/NewPassword/NewPassword";
+import BoughtProduct from "./components/BroughtProduct/BoughtProduct";
 
+import Wishlist from "./components/WishList/WishList";
+import AllOrder from "./components/AllOrder/AllOrder";
 import ChatPage from "./components/ChatApp/ChatApp";
 import Blog from "./components/Blog/Blog";
 
@@ -33,9 +39,20 @@ function App({ history2 }) {
     appcontext.loadUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    if (
+      appcontext.isAuthenticated &&
+      appcontext.user &&
+      !appcontext.user.admin
+    ) {
+      // appcontext.getAuthBasket();
+    } else {
+      appcontext.getBasket();
+    }
+  }, []);
   return (
     <Router>
-      <div className='app'>
+      <div className={`app ${appcontext.mode ? "light-mode" : "dark-mode"}`}>
         <Helmet>
           <title>{"Soonest"}</title>
         </Helmet>
@@ -50,11 +67,20 @@ function App({ history2 }) {
             <Route exact path='/admin/addadmin' component={AddAdmin} />
             <Route exact path='/admin/addproduct' component={AddProduct} />
             <Route exact path='/admin/addedproduct' component={AddedProduct} />
+            <Route exact path='/admin/allorder' component={AllOrder} />
+            <Route
+              exact
+              path='/recentbroughtproduct'
+              component={BoughtProduct}
+            />
+            <Route exact path='/wishlist' component={Wishlist} />
             <Route
               exact
               path='/admin/updateproduct/:id'
               component={UpdateProduct}
             />
+            <Route exact path='/resetpassword' component={ResetPassword} />
+            <Route exact path='/reset/:token' component={NewPassword} />
             <Route exact path='/admin/addblog' component={Addblog} />
             <Route exact path='/admin/addedblog' component={BlogShow} />
             <Route exact path='/admin/updateblog/:id' component={UpdateBlog} />
@@ -76,7 +102,7 @@ function App({ history2 }) {
               </div>
             </Route>
             <Route exact path='/shop' component={ProductShow} />
-            <Route exact path='/blog' component={Blog} />
+            <Route exact path='/blog' component={ClientBlog} />
             <Route exact path='/' component={Home} />
           </React.Fragment>
         </Switch>

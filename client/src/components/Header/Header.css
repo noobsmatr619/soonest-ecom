@@ -1,6 +1,5 @@
 .header {
-
-  background-color:#4501ca;
+  background-color: #4501ca;
   height: 80px;
   display: flex;
   justify-content: flex-start;
@@ -13,6 +12,7 @@
 .headerLogo {
   width: 100px;
   object-fit: contain;
+  margin-left:5px;
 }
 
 .menuIcon {
@@ -67,13 +67,13 @@
   align-items: center;
 }
 
-span {
-  margin-left: 16px;
-}
 .headerSearchIcon {
   padding: 5px;
   height: 22px !important;
   background-color: #cd9042;
+}
+span {
+  margin-left: 16px;
 }
 
 .headerLeftNav {
@@ -81,7 +81,7 @@ span {
   justify-content: space-evenly;
 }
 .headerSearch {
-  padding-right: 20px;
+  padding-right: 30px;
   display: flex;
   flex: 1;
   align-items: center;
@@ -90,7 +90,7 @@ span {
 }
 .headerSearchInput {
   height: 12px;
-  padding: 10px;
+  padding: 15px;
   border: none;
   width: 90%;
 }
@@ -132,6 +132,6 @@ span {
   color: black;
   margin-left: 0px !important ;
 }
-.menuClosIcon{
+.menuClosIcon {
   color: #f5f5f5;
 }

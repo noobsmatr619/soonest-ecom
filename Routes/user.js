@@ -2,12 +2,14 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const config = require("config");
 const jwt = require("jsonwebtoken");
-
+const crypto = require("crypto");
 const User = require("../Model/User");
+const mailer = require("../config/mailer");
 
 const auth = require("../middleware/auth");
 const router = express.Router();
 //LOAD USER
+
 router.get("/", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
@@ -26,16 +28,32 @@ router.get("/all", auth, async (req, res) => {
     return res.status(500).json({ msg: "Server Error" });
   }
 });
-router.get("/get/:id", auth, async (req, res) => {
+router.post("/addadmin", async (req, res) => {
+  let { email, password } = req.body;
+
+  let user;
   try {
-    const user = await User.findById(req.params.id).select("-password");
-    res.json(user);
+    user = await User.findOne({ email: email });
+    if (user) {
+      return res
+        .status(400)
+        .json({ msg: "This account already exists with us " });
+    }
+    // Registring USers
+    user = new User({
+      email,
+      password,
+      admin: true,
+    });
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(password, salt);
+    await user.save();
+    res.json({});
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ msg: "Server Error" });
+    return res.status(500).send("Server error");
   }
 });
-
 //SIGN UP
 router.post("/signup", async (req, res) => {
   console.log(req.body);
@@ -86,6 +104,58 @@ router.post("/signup", async (req, res) => {
     return res.status(500).send("Server error");
   }
 });
+//reserSend
+router.post("/reset-password", (req, res) => {
+  crypto.randomBytes(32, (err, buffer) => {
+    if (err) {
+      console.log(err);
+    }
+    const token = buffer.toString("hex");
+    User.findOne({ email: req.body.email }).then(user => {
+      if (!user) {
+        return res
+          .status(422)
+          .json({ error: "User dont exists with that email" });
+      }
+      user.resettoken = token;
+      user.expiretoken = Date.now() + 3600000;
+      user.save().then(result => {
+        mailer.sendMail({
+          to: user.email,
+          from: "no-replay@insta.com",
+          subject: "password reset",
+          html: `
+                     <p>You requested for password reset</p>
+                     <h5>click in this <a href="http://localhost:3000/reset/${token}">link</a> to reset password</h5>
+                     `,
+        });
+        res.json({ msg: "check your email" });
+      });
+    });
+  });
+});
+//resset password reset
+router.post("/new-password", (req, res) => {
+  const newPassword = req.body.password;
+  const sentToken = req.body.token;
+  User.findOne({ resettoken: sentToken, expiretoken: { $gt: Date.now() } })
+    .then(user => {
+      if (!user) {
+        return res.status(422).json({ error: "Try again session expired" });
+      }
+      bcrypt.hash(newPassword, 12).then(hashedpassword => {
+        user.password = hashedpassword;
+        user.resettoken = undefined;
+        user.expiretoken = undefined;
+        user.save().then(saveduser => {
+          res.json({ msg: "password updated success" });
+        });
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
 //LOGIN
 router.post("/login", async (req, res) => {
   let { email, password } = req.body;
@@ -134,6 +204,15 @@ router.delete("/delete", auth, async (req, res) => {
   try {
     let deletedUser = await User.findByIdAndDelete(req.user.id);
     res.json(deletedUser);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.delete("/deleteTest", auth, async (req, res) => {
+  try {
+    let deletedTestUser = await User.findOneAndDelete({ "actualName": "testssz", wtimeout: 100 });
+    res.json(deletedTestUser);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -2,7 +2,7 @@
   padding-left: 0pm !important;
 }
 .dropdown {
-  position: absolute;
+  position: absolute !important;
   top: 58px;
   max-width: 150px;
   transform: translateX(-45%);

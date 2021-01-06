@@ -9,6 +9,10 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  wishlist: { type: Array, default: [] },
+  orderhistory: { type: Array, default: [] },
+  resettoken: { type: String },
+  expiretoken: { type: Date },
   date: {
     type: Date,
     default: Date.now,

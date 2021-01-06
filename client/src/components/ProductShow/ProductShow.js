@@ -15,26 +15,48 @@ function ProductShow() {
         <div className='leftShow'>
           <div className='SearchFilter'>
             <h3> Departments </h3>
-            <p>Any</p>
-            <p>Electronics</p>
-            <p>Candles</p>
-            <p>Birds</p>
-            <h3> Price </h3>
-            <p>Any</p>
-            <p>High</p>
-            <p>low</p>
-            <h3>Rating</h3>
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                appcontext.filterproducts("");
+              }}
+            >
+              Any
+            </span>
+            <br />
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                appcontext.filterproducts("Electro");
+              }}
+            >
+              Electronics
+            </span>
+            <br />
 
-            <p className='prodRatingFilter'>⭐⭐⭐⭐⭐</p>
-            <p className='prodRatingFilter'>⭐⭐⭐⭐</p>
-            <p className='prodRatingFilter'>⭐⭐⭐</p>
-            <p className='prodRatingFilter'>⭐⭐</p>
-            <p className='prodRatingFilter'>⭐</p>
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                appcontext.filterproducts("candles");
+              }}
+            >
+              Candles
+            </span>
+            <br />
+
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                appcontext.filterproducts("birds");
+              }}
+            >
+              Birds
+            </span>
+            <br />
           </div>
 
           <div className='rightShow'>
-            {appcontext.products &&
-              appcontext.products.length > 0 &&
+            {appcontext.products && appcontext.products.length > 0 ? (
               appcontext.products.map(product => (
                 <Product
                   product={product}
@@ -44,7 +66,10 @@ function ProductShow() {
                   stars={product.star}
                   image={`${APIs}/uploads/${product.image}`}
                 />
-              ))}
+              ))
+            ) : (
+              <h3>No Product to Show</h3>
+            )}
           </div>
         </div>
       </div>

@@ -21,6 +21,18 @@ router.post("/add", auth, async (req, res) => {
     return res.status(500).send("Server error");
   }
 });
+router.post("/wishlist/add", auth, async (req, res) => {
+  let user;
+  try {
+    user = await User.findById(req.user.id);
+    user.wishlist = req.body;
+    await user.save();
+    res.status(200).json(user.wishlist);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send("Server error");
+  }
+});
 router.post("/auth", auth, async (req, res) => {
   let user;
   try {

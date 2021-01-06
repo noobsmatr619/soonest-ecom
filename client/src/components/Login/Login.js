@@ -99,6 +99,9 @@ function Login() {
                 Create Account
               </button>
             </Link>
+            <Link to='/resetpassword'>
+              <small>Forgot Password</small> ?
+            </Link>
           </div>
         </form>
       </div>

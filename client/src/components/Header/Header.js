@@ -5,50 +5,77 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import SearchIcon from "@material-ui/icons/Search";
 import { SidebarData } from "../SliderData/SidebarData";
+import { Sidebar2Data } from "../SliderData/Sidebar2Data";
 import { IconButton } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import SettingsIcon from "@material-ui/icons/Settings";
 import SendIcon from "@material-ui/icons/Send";
+import Switch from "rc-switch";
 import StoreIcon from "@material-ui/icons/Store";
 import HomeIcon from "@material-ui/icons/Home";
 import BookIcon from "@material-ui/icons/Book";
 import AuthOptions from "../Auth/authentication";
+import DarkModeToggle from "../../util/DarkModeToggle";
 import AppContext from "../../Context/AppContext";
 function Header() {
   let appcontext = useContext(AppContext);
   let [sidebarHandler, SidebarState] = useState(false);
   let slideSidebar = () => SidebarState(!sidebarHandler);
   return (
-    <div className='header'>
-      <div className='menuIcon'>
-        {" "}
-        {/* collapsing menu */}
-        <IconButton className='CollapsibleMenu' onClick={slideSidebar}>
-          <MenuIcon />
-        </IconButton>
-        <nav className={sidebarHandler ? "nav-menu showing" : "nav-menu"}>
-          <ul className='navMenuList' onClick={slideSidebar}>
-            <li className='navbar-toggle'>
-              <IconButton>
-                <CloseIcon className='menuClosIcon' />
-              </IconButton>
-            </li>
+    <div className='header '>
+      {appcontext.isAuthenticated && (
+        <div className='menuIcon'>
+          {" "}
+          {/* collapsing menu */}
+          <IconButton className='CollapsibleMenu' onClick={slideSidebar}>
+            <MenuIcon />
+          </IconButton>
+          <nav className={sidebarHandler ? "nav-menu showing" : "nav-menu"}>
+            <ul className='navMenuList' onClick={slideSidebar}>
+              <li className='navbar-toggle'>
+                <IconButton>
+                  <CloseIcon className='menuClosIcon' />
+                </IconButton>
+              </li>
+              {appcontext.isAuthenticated &&
+                appcontext.user &&
+                appcontext.user.admin && (
+                  <>
+                    {Sidebar2Data.map((item, index) => {
+                      return (
+                        <li key={index} className={item.cName}>
+                          <Link to={item.path}>
+                            {item.icon}
+                            <span>{item.title}</span>
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </>
+                )}
+              {appcontext.isAuthenticated &&
+                appcontext.user &&
+                !appcontext.user.admin && (
+                  <>
+                    {SidebarData.map((item, index) => {
+                      return (
+                        <li key={index} className={item.cName}>
+                          <Link to={item.path}>
+                            {item.icon}
+                            <span>{item.title}</span>
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </>
+                )}
+            </ul>
+          </nav>
+        </div>
+      )}
 
-            {SidebarData.map((item, index) => {
-              return (
-                <li key={index} className={item.cName}>
-                  <Link to={item.path}>
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </div>
       <Link to='/'>
         <img className='headerLogo' src='/Image/logo.png' alt='#' />
       </Link>
@@ -79,7 +106,9 @@ function Header() {
                 <StoreIcon />{" "}
               </span>{" "}
               <br />
-              <span className='headerOptLineTwo'>Add Product </span>
+              <span className='headerOptLineTwo'>
+                Add <div style={{ marginLeft: "12px" }}>Product </div>{" "}
+              </span>
             </Link>
           </div>
           <div style={{ cursor: "pointer" }} className='headerLeftOpt'>
@@ -89,7 +118,9 @@ function Header() {
                 <StoreIcon />{" "}
               </span>{" "}
               <br />
-              <span className='headerOptLineTwo'>Added Product </span>
+              <span className='headerOptLineTwo'>
+                Added <div style={{ marginLeft: "12px" }}>Product</div>{" "}
+              </span>
             </Link>
           </div>
           <div style={{ cursor: "pointer" }} className='headerLeftOpt  '>
@@ -99,7 +130,10 @@ function Header() {
                 <BookIcon />
               </span>
               <br />
-              <span className='headerOptLineTwo'> Create Blog</span>{" "}
+              <span className='headerOptLineTwo'>
+                {" "}
+                Create <div style={{ marginLeft: "12px" }}>Blog</div>
+              </span>{" "}
             </Link>
           </div>
           <div style={{ cursor: "pointer" }} className='headerLeftOpt'>
@@ -109,7 +143,9 @@ function Header() {
                 <StoreIcon />{" "}
               </span>{" "}
               <br />
-              <span className='headerOptLineTwo'>Added Blog </span>
+              <span className='headerOptLineTwo'>
+                Added <div style={{ marginLeft: "12px" }}>Blog</div>{" "}
+              </span>
             </Link>
           </div>
           <div style={{ cursor: "pointer" }} className='headerLeftOpt'>
@@ -119,7 +155,9 @@ function Header() {
                 <StoreIcon />{" "}
               </span>{" "}
               <br />
-              <span className='headerOptLineTwo'>Add Admin </span>
+              <span className='headerOptLineTwo'>
+                Add <div style={{ marginLeft: "12px" }}>Admin</div>{" "}
+              </span>
             </Link>
           </div>
         </div>
@@ -161,14 +199,22 @@ function Header() {
               <span className='headerOptLineTwo'> Blog</span>{" "}
             </Link>
           </div>
+          <div>{/* <DarkModeToggle /> */}</div>
         </div>
       )}
-      {appcontext.isAuthenticated && appcontext.user && !appcontext.user.admin && (
+      {appcontext.isAuthenticated &&
+      appcontext.user &&
+      appcontext.user.admin ? (
+        <>.</>
+      ) : (
         <div className='headerSearch'>
-          <SearchIcon className='headerSearchIcon' />
           <input
             className='headerSearchInput'
             type='text'
+            onChange={(e, r) => {
+              console.log(r);
+              appcontext.filterproducts(e.target.value);
+            }}
             placeholder='Search Anything'
           />
         </div>
@@ -177,7 +223,7 @@ function Header() {
       {appcontext.isAuthenticated &&
       appcontext.user &&
       appcontext.user.admin ? (
-        <div className='headerRightNav'>
+        <div style={{ alignIitems: "flex-end" }} className='headerRightNav'>
           <span className='headerBasketCount'></span>
           <AuthOptions />
           <span className='headerRightOption'>
@@ -185,7 +231,7 @@ function Header() {
           </span>
         </div>
       ) : (
-        <div className='headerRightNav'>
+        <div style={{ alignIitems: "flex-end" }} className='headerRightNav'>
           <span className='headerBasketCount'>
             {appcontext.cart ? appcontext.cart.length : 0}
           </span>
@@ -200,6 +246,7 @@ function Header() {
           </span>
         </div>
       )}
+      <Switch onChange={() => appcontext.switchMode()} />
     </div>
   );
 }

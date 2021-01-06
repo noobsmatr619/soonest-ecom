@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
     let product = await Product.find({});
     // console.log(product);
     res.status(200).json(product);
-  } catch (error) {}
+  } catch (error) { }
 });
 
 router.get("/:id", auth, verify.isAdmin, async (req, res) => {
@@ -36,6 +36,7 @@ router.post(
     let { name, size, quantity, description, star, category, price } = req.body;
     let { filename } = req.file;
     try {
+      console.log(req.body);
       let newProduct = new Product({
         name: name,
         image: filename,

@@ -26,9 +26,13 @@ router.post("/login", async (req, res) => {
     if (!user) {
       return res.status(400).json({ msg: "Invalid Credentials" });
     }
-    if (password !== user.password) {
-      return res.status(400).json({ msg: "Invalid Credentials" });
+
+    let isMactch = await bcrypt.compare(password, user.password);
+    if (!isMactch) {
+      return res.status(400).json({ msg: "Invalid  password" });
     }
+
+
     payload = {
       user: {
         id: user.id,
