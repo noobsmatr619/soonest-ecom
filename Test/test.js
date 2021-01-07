@@ -179,22 +179,22 @@ describe('Task', () => {
 
     // });
 
-    describe('Add a blog as client', () => {
-        it('it should add a blog as client', (done) => {
-            chai.request(server)
-                .post('/api/blog/addblog')
-                .set('Content-Type', 'application/json')
-               
-                .send(testData.addBlog)
-                .end((err, response) => {
-                    response.should.have.status(400);
-                    console.log(response);
-                    done();
-                })
+    // describe('Add a blog as client', () => {
+    //     it('it should add a blog as client', (done) => {
+    //         chai.request(server)
+    //             .post('/api/blog/addblog')
+    //             .set('Content-Type', 'application/json')
 
-        }).timeout(10000);
+    //             .send(testData.addBlog)
+    //             .end((err, response) => {
+    //                 response.should.have.status(400);
+    //                 console.log(response);
+    //                 done();
+    //             })
 
-    });
+    //     }).timeout(10000);
+
+    // });
 
 })
 
