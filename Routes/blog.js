@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const upload = require("../upload");
-const Blog = require("../model/Blog");
+const Blog = require("../Model/Blog");
 const auth = require("../middleware/auth");
 
 const config = require("config");
@@ -59,7 +59,7 @@ router.post(
   verify.isAdmin,
   upload.single("image"),
   async (req, res) => {
-    
+
     let { title, category, editor } = req.body;
     // console.log(req.body);
     try {
