@@ -105,7 +105,7 @@ describe('Task', () => {
         }).timeout(10000);
 
     });
-    // write some test thats suppose to fail 
+    // write some test that will fail 
     // describe('Create a new Product', () => {
     //     it('it should create product', (done) => {
     //         chai.request(server)
