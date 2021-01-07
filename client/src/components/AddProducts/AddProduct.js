@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import AppContext from "../../Context/AppContext";
+import { toast } from "react-toastify";
 import "./AddProduct.css";
 const AddProduct = () => {
   const history = useHistory();
@@ -29,20 +30,45 @@ const AddProduct = () => {
   };
   let onSubmit = e => {
     e.preventDefault();
-    let form = new FormData();
-    const AddForm = async () => {
-      form.append("name", Form.name);
-      form.append("size", Form.size);
-      form.append("quantity", Form.quantity);
-      form.append("image", profileImage);
-      form.append("category", Form.category);
-      form.append("star", Form.star);
-      form.append("price", Form.price);
-      form.append("description", Form.description);
-      await appcontext.addProduct(form);
-      history.push("/admin/addedproduct");
-    };
-    AddForm();
+
+    if (Form.name === "") {
+      return toast.error("Name is not filled ");
+    } else if (Form.size === "") {
+      return toast.error("Size is not mentioned");
+    }
+    else if (Form.quantity === "") {
+      return toast.error("Quantity is not filled ");
+    }
+    else if (profileImage === "") {
+      return toast.error("Product has no image");
+    }
+    else if (Form.star === "") {
+      return toast.error("Add inital stars");
+    }
+    else if (Form.price === "") {
+      return toast.error("Price is not mentioned");
+    }
+    else if (Form.description === "") {
+      return toast.error("Needs Description");
+    }
+    else {
+      let form = new FormData();
+      const AddForm = async () => {
+        form.append("name", Form.name);
+        form.append("size", Form.size);
+        form.append("quantity", Form.quantity);
+        form.append("image", profileImage);
+        form.append("category", Form.category);
+        form.append("star", Form.star);
+        form.append("price", Form.price);
+        form.append("description", Form.description);
+        await appcontext.addProduct(form);
+        history.push("/admin/addedproduct");
+      };
+      AddForm();
+
+    }
+
   };
   return (
     <div>
@@ -106,7 +132,9 @@ const AddProduct = () => {
             onChange={inputHandler}
           />
           <br />
+
           <button type='submit'>submit</button>
+
         </div>
       </form>
     </div>

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import AppContext from "../../Context/AppContext";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-
-const Example = () => {
+import { toast } from "react-toastify";
+const AddAdmin = () => {
   const appcontext = useContext(AppContext);
   const [form, setform] = useState({
     email: "",
@@ -14,8 +14,16 @@ const Example = () => {
     setform(data);
   };
   const onSubmit = e => {
+
     e.preventDefault();
-    appcontext.addAdmin(form);
+    let { email, password } = form;
+    if (email === "") {
+      return toast.error("Please Enter Your Email");
+    } else if (password === "") {
+      return toast.error("Please Enter Your Password");
+    }
+    else { appcontext.addAdmin(form); }
+
   };
   return (
     <div className='container'>
@@ -54,4 +62,4 @@ const Example = () => {
   );
 };
 
-export default Example;
+export default AddAdmin;

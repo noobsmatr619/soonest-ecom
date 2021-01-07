@@ -7,6 +7,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import DraftsIcon from "@material-ui/icons/Drafts";
 import AppContext from "../../Context/AppContext";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 import "./Addblog.css";
 const Addblog = () => {
   const history = useHistory();
@@ -31,16 +32,31 @@ const Addblog = () => {
   };
   let onSubmit = e => {
     e.preventDefault();
-    let form = new FormData();
-    const AddForm = async () => {
-      form.append("title", Title);
-      form.append("category", Category);
-      form.append("editor", Editor);
-      form.append("image", profileImage);
-      console.log(appcontext);
-      await appcontext.addBlog(form);
-    };
-    AddForm();
+
+    if (Title === "") {
+      return toast.error("Title is not filled ");
+    } else if (Category === "") {
+      return toast.error("Category not filled ");
+    }
+    else if (Editor === "") {
+      return toast.error("Editor not filled ");
+    }
+    else if (profileImage === "") {
+      return toast.error("Blog has no image");
+    }
+    else {
+      let form = new FormData();
+      const AddForm = async () => {
+        form.append("title", Title);
+        form.append("category", Category);
+        form.append("editor", Editor);
+        form.append("image", profileImage);
+        // console.log(appcontext);
+        await appcontext.addBlog(form);
+      };
+      AddForm();
+    }
+
   };
   return (
     <div>

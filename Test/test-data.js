@@ -20,11 +20,10 @@ const addProduct = {
     "price": "2"
 }
 const addBlog = {
-    "title": "test",
-    "image": "test.jpg",
-    "filename": "test",
-    "category": "test",
-    "editor": "test"
+    "title": "test123456",
+
+
+    "category": "Pet"
 }
 
 const Token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWZmNDlkNWQ4NTJmYTAzODM0OTgzMGJiIiwiYWRtaW4iOmZhbHNlfSwiaWF0IjoxNjA5ODY2NzE5LCJleHAiOjE2NDEzMTYzMTl9.CEabw4xtaLa0R0yBzY6wC4js-1f09yRxsJGeFUtvkvk';

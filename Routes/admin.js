@@ -24,14 +24,16 @@ router.post("/login", async (req, res) => {
   try {
     user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ msg: "Invalid Credentials" });
+      return res.status(400).send("User is not registered");
     }
+
     // if (password !== user.password) {
     //   return res.status(400).json({ msg: "Invalid Credentials" });
     // }
     let isMactch = await bcrypt.compare(password, user.password);
     if (!isMactch) {
-      return res.status(400).json({ msg: "Invalid  password" });
+      // return res.status(400).json({ msg: "Invalid  password" });
+      return res.status(400).send("Password is incorrect");
     }
 
     payload = {

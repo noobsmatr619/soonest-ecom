@@ -41,25 +41,25 @@ describe('Task', () => {
         }).timeout(10000);
 
     });
-    // describe('delete the existing user', () => {
-    //     it('it should delete the  user', (done) => {
-    //         chai.request(server)
-    //             .delete('/api/user/deleteTest')
-    //             .set('Content-Type', 'application/json')
-    //             .set('x-auth-token', testData.Token)
-    //             .send({
-    //                 // "id": "5ff49215073e021e54403cc9",
-    //                 "actualName": "testssz"
-    //                 // "password": "Test1234!",
-    //             })
-    //             .end((err, response) => {
-    //                 response.should.have.status(200);
-    //                 done();
-    //             })
+    describe('delete the existing user', () => {
+        it('it should delete the  user', (done) => {
+            chai.request(server)
+                .delete('/api/user/delete')
+                .set('Content-Type', 'application/json')
+                .set('x-auth-token', testData.Token)
+                .send({
+                    // "id": "5ff49215073e021e54403cc9",
+                    "actualName": "testssz"
+                    // "password": "Test1234!",
+                })
+                .end((err, response) => {
+                    response.should.have.status(200);
+                    done();
+                })
 
-    //     }).timeout(10000);
+        }).timeout(10000);
 
-    // });
+    });
 
     describe('Add an admin', () => {
         it('it should add an admin', (done) => {
@@ -151,6 +151,7 @@ describe('Task', () => {
         }).timeout(10000);
 
     });
+
     describe('Get all Blogs', () => {
         it('it should list of all blog', (done) => {
             chai.request(server)
@@ -160,6 +161,37 @@ describe('Task', () => {
                     expect(response.body).to.be.an('Array');
                     done();
                 });
+        }).timeout(10000);
+
+    });
+    // describe('Add a blog', () => {
+    //     it('it should Add a blog', (done) => {
+    //         chai.request(server)
+    //             .post('/api/blog/addblog')
+    //             .set('Content-Type', 'application/json')
+    //             .set('x-auth-token', testData.AdminToken)
+    //             .send(testData.addBlog)
+    //             .end((err, response) => {
+    //                 response.should.have.status(200);
+    //                 done();
+    //             })
+    //     }).timeout(10000);
+
+    // });
+
+    describe('Add a blog as client', () => {
+        it('it should add a blog as client', (done) => {
+            chai.request(server)
+                .post('/api/blog/addblog')
+                .set('Content-Type', 'application/json')
+               
+                .send(testData.addBlog)
+                .end((err, response) => {
+                    response.should.have.status(400);
+                    console.log(response);
+                    done();
+                })
+
         }).timeout(10000);
 
     });

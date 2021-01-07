@@ -13,7 +13,7 @@
     "test": "mocha ./Test/test.js --exit"
   },
   "keywords": [],
-  "author": "",
+  "author": "smatr",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
