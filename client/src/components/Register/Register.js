@@ -128,6 +128,8 @@ function Register() {
               type={passwordShown ? "text" : "password"}
             />
           </Grid>
+          <p>Password must contain <br /> atleast 1 of each- Capital, small letter, numeric and any of the <br /> following symbols
+          "@$!%*#?&" </p>
           <div className='loginPageButtons'>
             <Link to='/login'>
               {" "}

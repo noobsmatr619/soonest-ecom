@@ -59,7 +59,7 @@ function NewPassword() {
           </Grid>
           <div className='tags'>
             {" "}
-            <h3>Confrim Password</h3>
+            <h3>Confirm Password</h3>
           </div>
           <Grid container direction='row' alignItems='center'>
             <PermIdentityIcon className='icon' />
@@ -72,6 +72,8 @@ function NewPassword() {
               onChange={inputHandler}
             />
           </Grid>
+          <p>Password must contain <br /> atleast 1 of each- Capital, small letter, numeric and any of the <br /> following symbols
+          "@$!%*#?&" </p>
           <div className='loginPageButtons'>
             <input
               type='submit'
