@@ -39,7 +39,7 @@ db.once("open", function () {
       // console.log("disconnect");
     });
   });
-});
+ 2});
 
 app.get("*", (req, res) => {
   res.sendFile("index.html", { root });
@@ -50,4 +50,4 @@ http.listen(PORT, () => {
 });
 module.exports = app;
 
-//check
+//check 2
