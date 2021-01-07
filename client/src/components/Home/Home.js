@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import AppContext from "../../Context/AppContext";
 import { APIs } from "../../constraint/API";
 import SimpleSlider from "../../Assets/Slider";
@@ -7,6 +7,9 @@ import Product from "../Product/Product";
 import "./Home.css";
 function Home() {
   const appcontext = useContext(AppContext);
+  useEffect(() => {
+    appcontext.getAllProduct()
+  }, [])
   return (
     <div className='home'>
       <div className='homeCont'>
