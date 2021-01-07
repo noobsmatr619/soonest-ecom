@@ -7,7 +7,7 @@ import { APIs } from "./constraint/API";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 let socket = io.connect(APIs);
 socket.on("notificaton", id => {
-  toast.info("Some Recently purchased A Product!!");
+  toast.info("Someone Recently purchased A Product!!");
 });
 const App = () => {
   let a = [];
