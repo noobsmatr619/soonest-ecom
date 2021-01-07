@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const upload = require("../upload");
-const Product = require("../model/Product");
+const Product = require("../Model/Product");
 const User = require("../Model/User");
 const auth = require("../middleware/auth");
 
@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
     let product = await Product.find({});
     // console.log(product);
     res.status(200).json(product);
-  } catch (error) {}
+  } catch (error) { }
 });
 
 router.get("/:id", auth, verify.isAdmin, async (req, res) => {
@@ -60,7 +60,7 @@ router.post(
   verify.isAdmin,
   upload.single("image"),
   async (req, res) => {
-    
+
     let { name, size, quantity, description, star, category, price } = req.body;
     // console.log(req.body);
     try {
