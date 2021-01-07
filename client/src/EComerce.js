@@ -16,27 +16,37 @@ import UpdateProduct from "./components/UpdateProduct/UpdateProduct";
 import BlogShow from "./components/BlogShow/BlogShow";
 import ClientBlog from "./components/ClientBlog/ClientBlog";
 import Addblog from "./components/AddBlog/Addblog";
+import EditUserDetails from "./components/EditUserDetails.js/EditUserDetails";
 import UpdateBlog from "./components/UpdateBlog/UpdateBlog";
 import AddAdmin from "./components/AddAdmin/AddAdmin";
 import ParticipantPanel from "./components/ChatApp/Components/ParticipantPanel/ParticipantPanel";
 import ResetPassword from "./components/Reset/Reset";
 import NewPassword from "./components/NewPassword/NewPassword";
 import BoughtProduct from "./components/BroughtProduct/BoughtProduct";
-
+import { APIs } from "./constraint/API";
 import Wishlist from "./components/WishList/WishList";
 import AllOrder from "./components/AllOrder/AllOrder";
 import ChatPage from "./components/ChatApp/ChatApp";
 import Blog from "./components/Blog/Blog";
-
+import io from "socket.io-client";
+import { toast } from "react-toastify";
 import AppContext from "./Context/AppContext";
+import AdminRoutes from "./routing/AdminRoutes";
+import ClientRoutes from "./routing/ClientRoutes";
+import BothRoutes from "./routing/BothRoutes";
 import setAuthToken from "./util/setAuthToken";
+
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
-function App({ history2 }) {
+
+function App({ socket }) {
   let appcontext = useContext(AppContext);
   useEffect(() => {
-    appcontext.loadUser();
+    const run = async () => {
+      await appcontext.loadUser();
+    };
+    run();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
@@ -50,10 +60,25 @@ function App({ history2 }) {
       appcontext.getBasket();
     }
   }, []);
+
   return (
-    <Router>
-      <div className={`app ${appcontext.mode ? "light-mode" : "dark-mode"}`}>
-        <Helmet>
+    <div className={`app ${appcontext.mode && "light-mode"}`}>
+      <Router>
+        <Helmet
+          style={[
+            {
+              cssText: `
+              ${!appcontext.mode &&
+                `body {
+                background-color: #1a1919 !important;
+                 color: #999 !important;
+              }`
+                } 
+            
+        `,
+            },
+          ]}
+        >
           <title>{"Soonest"}</title>
         </Helmet>
 
@@ -61,53 +86,72 @@ function App({ history2 }) {
 
         <Switch>
           <React.Fragment>
-            <Route exact path='/buy' component={Buy} />
+            <ClientRoutes exact path='/buy'>
+              <Buy socket={socket} />
+            </ClientRoutes>
             <Route exact path='/login' component={Login} />
+            <BothRoutes exact path='/edituser' component={EditUserDetails} />
             <Route exact path='/admin' component={LoginAsAdmin} />
-            <Route exact path='/admin/addadmin' component={AddAdmin} />
-            <Route exact path='/admin/addproduct' component={AddProduct} />
-            <Route exact path='/admin/addedproduct' component={AddedProduct} />
-            <Route exact path='/admin/allorder' component={AllOrder} />
-            <Route
+            <AdminRoutes exact path='/admin/addadmin' component={AddAdmin} />
+            <AdminRoutes
+              exact
+              path='/admin/addproduct'
+              component={AddProduct}
+            />
+            <AdminRoutes
+              exact
+              path='/admin/addedproduct'
+              component={AddedProduct}
+            />
+            <AdminRoutes exact path='/admin/allorder' component={AllOrder} />
+            <ClientRoutes
               exact
               path='/recentbroughtproduct'
               component={BoughtProduct}
             />
             <Route exact path='/wishlist' component={Wishlist} />
-            <Route
+            <AdminRoutes
               exact
               path='/admin/updateproduct/:id'
               component={UpdateProduct}
             />
             <Route exact path='/resetpassword' component={ResetPassword} />
             <Route exact path='/reset/:token' component={NewPassword} />
-            <Route exact path='/admin/addblog' component={Addblog} />
-            <Route exact path='/admin/addedblog' component={BlogShow} />
-            <Route exact path='/admin/updateblog/:id' component={UpdateBlog} />
+            <AdminRoutes exact path='/admin/addblog' component={Addblog} />
+            <AdminRoutes exact path='/admin/addedblog' component={BlogShow} />
+            <AdminRoutes
+              exact
+              path='/admin/updateblog/:id'
+              component={UpdateBlog}
+            />
             <Route exact path='/register' component={Register} />
-            <Route path='/chat'>
+            <ClientRoutes path='/chat'>
               <div className='ChatApp'>
                 <div className='ChatAppMainframe'>
-                  <Route path='/chat' component={ParticipantPanel} />
-                  <Route exact path='/chat/:id' component={ChatPage} />
+                  <ClientRoutes path='/chat' component={ParticipantPanel} />
+                  <ClientRoutes exact path='/chat/:id' component={ChatPage} />
                 </div>
               </div>
-            </Route>
-            <Route path='/adminchat'>
+            </ClientRoutes>
+            <AdminRoutes path='/adminchat'>
               <div className='ChatApp'>
                 <div className='ChatAppMainframe'>
-                  <Route path='/adminchat' component={ParticipantPanel} />
-                  <Route exact path='/adminchat/:id' component={ChatPage} />
+                  <AdminRoutes path='/adminchat' component={ParticipantPanel} />
+                  <AdminRoutes
+                    exact
+                    path='/adminchat/:id'
+                    component={ChatPage}
+                  />
                 </div>
               </div>
-            </Route>
+            </AdminRoutes>
             <Route exact path='/shop' component={ProductShow} />
             <Route exact path='/blog' component={ClientBlog} />
             <Route exact path='/' component={Home} />
           </React.Fragment>
         </Switch>
-      </div>
-    </Router>
+      </Router>
+    </div>
   );
 }
 

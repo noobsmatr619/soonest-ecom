@@ -19,8 +19,7 @@ const Example = () => {
   };
   return (
     <div className='container'>
-      <h1>Add Admin</h1>
-      <h4>Both fields are required</h4>
+      <h3>Add Admin</h3>
       <Form onSubmit={onSubmit}>
         <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
           <Label for='exampleEmail' className='mr-sm-2'>
@@ -31,7 +30,7 @@ const Example = () => {
             name='email'
             id='exampleEmail'
             onChange={inputHandler}
-            placeholder='email'
+            placeholder='Email'
           />
         </FormGroup>
         <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
@@ -46,6 +45,8 @@ const Example = () => {
             placeholder="password"
           />
         </FormGroup>
+        <p>Password must contain <br /> atleast 1 of each- Capital, small letter, numeric and any of the <br /> following symbols
+          "@$!%*#?&" </p>
         {"   "}
         <Button>Submit</Button>
       </Form>

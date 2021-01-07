@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import CurrencyFormat from "react-currency-format";
 import "./Total.css";
+import { useHistory } from "react-router-dom";
 import Paypal from "../../util/Paypal";
 import axios from "axios";
 import { APIs } from "../../constraint/API";
 import AppContext from "../../Context/AppContext";
-function Total() {
+function Total({ socket }) {
+  const history = useHistory();
+  const notice = "congraclution";
   const appcontext = useContext(AppContext);
   const [total, settotal] = useState(0);
   useEffect(() => {
@@ -36,6 +39,9 @@ function Total() {
       if (res.data.success) {
         appcontext.emptyCart();
         settotal(0);
+        socket.emit("notificaton", "game");
+        appcontext.loadUser();
+        history.push("/");
       }
     } catch (error) {}
   };

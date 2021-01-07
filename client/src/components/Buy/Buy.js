@@ -3,7 +3,7 @@ import "./Buy.css";
 import Total from "../Total/Total";
 import AddedItem from "../AddItems/AddedItem";
 import AppContext from "../../Context/AppContext";
-function Buy() {
+function Buy({ socket }) {
   const appcontext = useContext(AppContext);
   return (
     <div className='buy'>
@@ -25,7 +25,7 @@ function Buy() {
         </div>
       </div>
       <div className='righBuy'>
-        <Total />
+        <Total socket={socket} />
       </div>
     </div>
   );

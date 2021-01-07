@@ -24,6 +24,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "dotenv": "^8.2.0",
+    "eiows": "^3.4.1",
     "express": "^4.17.1",
     "html-react-parser": "^1.1.1",
     "jsonwebtoken": "^8.5.1",
@@ -37,6 +38,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "reactstrap": "^8.8.1",
+    "socket.io": "^3.0.5",
     "suneditor-react": "^2.14.10",
     "uuid": "^8.3.2"
   }

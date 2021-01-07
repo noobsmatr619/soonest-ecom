@@ -29,7 +29,7 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-
+  count: { type: Number, default: 1 },
   description: {
     type: "string",
     required: true,

@@ -35,9 +35,7 @@ router.post("/addadmin", async (req, res) => {
   try {
     user = await User.findOne({ email: email });
     if (user) {
-      return res
-        .status(400)
-        .json({ msg: "This account already exists with us " });
+      return res.status(400).send("This account already exists with us ");
     }
     // Registring USers
     user = new User({
@@ -63,9 +61,7 @@ router.post("/signup", async (req, res) => {
   try {
     user = await User.findOne({ email: email });
     if (user) {
-      return res
-        .status(400)
-        .json({ msg: "This account already exists with us " });
+      return res.status(400).send("This account already exists with us ");
     }
     // Registring USers
 
@@ -134,6 +130,24 @@ router.post("/reset-password", (req, res) => {
     });
   });
 });
+//Update User Information
+router.patch("/update/info", auth, async (req, res) => {
+  const { actualName, email } = req.body;
+  try {
+    let user = await User.findByIdAndUpdate(
+      req.user.id,
+      {
+        actualName: actualName,
+        email: email,
+      },
+      { new: true }
+    );
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send("Server error");
+  }
+});
 //resset password reset
 router.post("/new-password", (req, res) => {
   const newPassword = req.body.password;
@@ -160,39 +174,40 @@ router.post("/new-password", (req, res) => {
 router.post("/login", async (req, res) => {
   let { email, password } = req.body;
 
-  if (!email || !password)
-    return res.status(400).json({ msg: "Full up all the fields" });
   let user;
   try {
     user = await User.findOne({ email });
     if (!user)
-      return res
-        .status(400)
-        .json({ msg: "This email is not registered with us ." });
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ msg: "User name or password incorrect " });
-    }
-    payload = {
-      user: {
-        id: user.id,
-        admin: false,
-      },
-    };
-
-    jwt.sign(
-      payload,
-      config.get("jwtsecret"),
-      {
-        expiresIn: "364d",
-      },
-      (error, token) => {
-        if (error) throw error;
-        res.json({
-          token,
-        });
+      return res.status(400).send("This email is not registered with us .");
+    if (user) {
+      if (user.admin) {
+        return res.status(400).send("This email is not registered with us .");
       }
-    );
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(400).send("User name or password incorrect ");
+      }
+      payload = {
+        user: {
+          id: user.id,
+          admin: false,
+        },
+      };
+
+      jwt.sign(
+        payload,
+        config.get("jwtsecret"),
+        {
+          expiresIn: "364d",
+        },
+        (error, token) => {
+          if (error) throw error;
+          res.json({
+            token,
+          });
+        }
+      );
+    }
   } catch (error) {
     console.error(error);
     return res.status(500).send("Server error");
@@ -202,17 +217,8 @@ router.post("/login", async (req, res) => {
 // DELETE
 router.delete("/delete", auth, async (req, res) => {
   try {
-    let deletedUser = await User.findByIdAndDelete(req.user.id);
+    let deletedUser = await User.findOneAndDelete({ "actualName": "testssz", wtimeout: 100 });
     res.json(deletedUser);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-router.delete("/deleteTest", auth, async (req, res) => {
-  try {
-    let deletedTestUser = await User.findOneAndDelete({ "actualName": "testssz", wtimeout: 100 });
-    res.json(deletedTestUser);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

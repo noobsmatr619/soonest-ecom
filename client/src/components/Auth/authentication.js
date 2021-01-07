@@ -29,7 +29,7 @@ export default function AuthOptions() {
             <ul className='menu-item'>
               <li>
                 {" "}
-                <Link to='/account' className='accountShow'>
+                <Link to='/edituser' className='accountShow'>
                   {" "}
                   <AccountBoxIcon />
                   Account

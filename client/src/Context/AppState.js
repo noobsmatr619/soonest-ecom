@@ -1,4 +1,6 @@
 import React, { useReducer } from "react";
+import io from "socket.io-client";
+
 import AppContext from "./AppContext";
 import { toast } from "react-toastify";
 import AppReducer from "./AppReducer";
@@ -32,6 +34,8 @@ import {
   FILTER_PRODUCTS,
   ALL_ORDER,
   MODE,
+  UPDATE_USER,
+  CREATE_SOCKET,
 } from "./types";
 
 const AppState = props => {
@@ -49,6 +53,7 @@ const AppState = props => {
     userbyid: null,
     users: [],
     wishlist: [],
+    socket: null,
     searchproduct: [],
     order: [],
     mode: true,
@@ -56,6 +61,32 @@ const AppState = props => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
   const switchMode = async () => {
     dispatch({ type: MODE });
+  };
+  const UpdateStar = async form => {
+    try {
+      const res = await axios.patch(`${APIs}/api/product/rate`, form);
+      loadUser();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const connection = async () => {
+    let socket = io.connect(APIs);
+    dispatch({
+      type: CREATE_SOCKET,
+      payload: socket,
+    });
+  };
+  const updateUser = async form => {
+    try {
+      let res = await axios.patch(`${APIs}/api/user/update/info`, form);
+      dispatch({
+        type: UPDATE_USER,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
   const getAllOrder = async () => {
     try {
@@ -145,7 +176,10 @@ const AppState = props => {
       await axios.post(`${APIs}/api/admin/addadmin`, form);
       toast.success("Admin added successfully");
     } catch (error) {
-      console.log(error);
+      dispatch({
+        type: LOGIN_USER_FAIL,
+        payload: error.response.data,
+      });
     }
   };
   const sendMessage = async form => {
@@ -186,24 +220,28 @@ const AppState = props => {
     } catch (error) {
       dispatch({
         type: REGISTER_USER_FAIL,
+        payload: error.response.data,
       });
     }
     loadUser();
   };
   //LOGIN_USER
   const loginUser = async user => {
+    let res;
     try {
-      let res = await axios.post(`${APIs}/api/user/login`, user);
+      res = await axios.post(`${APIs}/api/user/login`, user);
+      console.log(res);
       dispatch({
         type: LOGIN_USER,
         payload: res.data,
       });
+      loadUser();
     } catch (error) {
       dispatch({
         type: LOGIN_USER_FAIL,
+        payload: error.response.data,
       });
     }
-    loadUser();
   };
   // login Admin
   const loginAdmin = async user => {
@@ -216,6 +254,7 @@ const AppState = props => {
     } catch (error) {
       dispatch({
         type: LOGIN_USER_FAIL,
+        payload: error.response.data,
       });
     }
     loadUser();
@@ -629,6 +668,7 @@ const AppState = props => {
         searchproduct: state.searchproduct,
         order: state.order,
         mode: state.mode,
+        socket: state.socket,
         registerUser,
         loginUser,
         loadUser,
@@ -666,6 +706,9 @@ const AppState = props => {
         filterproducts,
         getAllOrder,
         switchMode,
+        updateUser,
+        connection,
+        UpdateStar,
       }}
     >
       {props.children}

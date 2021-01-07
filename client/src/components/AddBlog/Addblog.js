@@ -45,8 +45,8 @@ const Addblog = () => {
   return (
     <div>
       <div className='addBlog'>
-        <h2 className='blogTitle'>Title</h2>
         <h4 className='blogTitle'>All fields are required to be filled</h4>
+        <h2 className='blogTitle'>Title</h2>
         <input
           name='title'
           type='text'

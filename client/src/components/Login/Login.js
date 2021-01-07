@@ -86,6 +86,8 @@ function Login() {
               className='icon'
             />
           </Grid>
+          <p>Password must contain <br /> atleast 1 of each- Capital, small letter, numeric and any of the <br /> following symbols
+          "@$!%*#?&" </p>
           <div className='loginPageButtons'>
             <input
               type='submit'

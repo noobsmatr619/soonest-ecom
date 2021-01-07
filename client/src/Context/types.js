@@ -3,6 +3,7 @@ export const REGISTER_USER_FAIL = "REGISTER_USER_FAIL";
 //LOGIN
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGIN_USER_FAIL = "LOGIN_USER_FAIL";
+export const UPDATE_USER = "UPDATE_USER";
 //Load_user
 export const LOAD_USER = "LOAD_USER";
 export const GET_USER_BY_ID = "GET_USER_BY_ID";
@@ -41,3 +42,7 @@ export const FILTER_PRODUCTS = "FILTER_PRODUCTS";
 export const ALL_ORDER = "ALL_ORDER";
 //Add
 export const MODE = "MODE";
+//socket
+export const CREATE_SOCKET = "CREATE_SOCKET";
+// Update Start
+export const UPDATE_STAR = "UPDATE_STAR";

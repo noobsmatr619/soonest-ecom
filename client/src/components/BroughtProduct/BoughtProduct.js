@@ -14,16 +14,21 @@ function ProductShow() {
             {appcontext.user &&
               appcontext.user.orderhistory.length > 0 &&
               appcontext.user.orderhistory.map(product => (
-                <Product
-                  product={product}
-                  id={product.id}
-                  date={product.dateOfPurchase}
-                  name={product.name}
-                  cost={product.price}
-                  payment={product.paymentId}
-                  star={product.star}
-                  image={`${APIs}/uploads/${product.image}`}
-                />
+                <>
+                  {console.clear()}
+                  {console.log(product)}
+                  <Product
+                    product={product}
+                    rated={product.rate || false}
+                    id={product.id}
+                    date={product.dateOfPurchase}
+                    name={product.name}
+                    cost={product.price}
+                    payment={product.paymentId}
+                    star={product.star}
+                    image={`${APIs}/uploads/${product.image}`}
+                  />
+                </>
               ))}
           </div>
         </div>

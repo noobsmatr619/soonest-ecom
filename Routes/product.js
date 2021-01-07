@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const upload = require("../upload");
-const Product = require("../Model/Product");
+const Product = require("../model/Product");
+const User = require("../Model/User");
 const auth = require("../middleware/auth");
 
 const config = require("config");
@@ -10,7 +11,7 @@ router.get("/", async (req, res) => {
     let product = await Product.find({});
     // console.log(product);
     res.status(200).json(product);
-  } catch (error) { }
+  } catch (error) {}
 });
 
 router.get("/:id", auth, verify.isAdmin, async (req, res) => {
@@ -36,7 +37,6 @@ router.post(
     let { name, size, quantity, description, star, category, price } = req.body;
     let { filename } = req.file;
     try {
-      console.log(req.body);
       let newProduct = new Product({
         name: name,
         image: filename,
@@ -60,7 +60,7 @@ router.post(
   verify.isAdmin,
   upload.single("image"),
   async (req, res) => {
-    console.log("mahad Route");
+    
     let { name, size, quantity, description, star, category, price } = req.body;
     // console.log(req.body);
     try {
@@ -102,7 +102,40 @@ router.patch("/update/:id", auth, verify.isAdmin, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+router.patch("/rate", auth, async (req, res) => {
+  console.log(req.body);
+  const { id, paymentId, star } = req.body;
+  try {
+    const product = await Product.findById(id);
+    if (product) {
+      product.star =
+        (Number(product.star) + Number(star)) /
+        (Number(product.count) + Number(1));
+      product.count = product.count + 1;
+      await User.findById(req.user.id).then(async user => {
+        let orderhistory = user.orderhistory.map(p => {
+          if (p.paymentId === paymentId && p.id === id) {
+            p.rate = true;
+          }
+          return p;
+        });
+        console.log(orderhistory);
+        user.orderhistory = [];
+        user.orderhistory = orderhistory;
 
+        console.log(user.orderhistory);
+        await user.save();
+      });
+
+      await product.save();
+      res.status(200).json({});
+    } else {
+      console.log("erro");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
 router.delete("/:id", auth, verify.isAdmin, async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);

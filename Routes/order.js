@@ -20,13 +20,14 @@ router.post("/", auth, async (req, res) => {
     user1 = await User.findById(req.user.id);
     let history = [];
     let transactionData = {};
-
+    console.log("run");
     //1.Put brief Payment Information inside User Collection
     req.body.cartDetail.forEach(item => {
       history.push({
         dateOfPurchase: moment(Date.now()),
         name: item.name,
         id: item._id,
+        rate: false,
         image: item.image,
         star: item.star,
         price: item.price,

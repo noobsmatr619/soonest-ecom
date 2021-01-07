@@ -12,7 +12,7 @@ const AddedProduct = () => {
   }, []);
   return (
     <div>
-      {console.log("Gamiing")}
+      {/* {console.log("Gamiing")} */}
       <div className='rightShow'>
         {appcontext.products &&
           appcontext.products.length > 0 &&

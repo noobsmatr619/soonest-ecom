@@ -22,7 +22,7 @@ export let Sidebar2Data = [
 
   {
     title: "Messages",
-    path: "/chat",
+    path: "/adminchat",
     icon: <MessageIcon />,
     cName: "nav-text",
   },

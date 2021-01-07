@@ -25,12 +25,25 @@ import {
   FILTER_PRODUCTS,
   ALL_ORDER,
   MODE,
+  UPDATE_USER,
+  CREATE_SOCKET,
 } from "./types";
 import { toast } from "react-toastify";
 
 /* eslint-disable import/no-anonymous-default-export */
 export default (state, action) => {
   switch (action.type) {
+    case CREATE_SOCKET:
+      return {
+        ...state,
+        socket: action.payload,
+      };
+    case UPDATE_USER:
+      toast.success("Successfully Updated User");
+      return {
+        ...state,
+        user: action.payload,
+      };
     case MODE:
       return {
         ...state,
@@ -186,9 +199,15 @@ export default (state, action) => {
         cart: action.payload,
       };
     case REGISTER_USER_FAIL:
-      return toast.error("Register FAIL Due to Some error");
+      toast.error("Register FAIL Due to Some error");
+      return {
+        ...state,
+      };
     case LOGIN_USER_FAIL:
-      return toast.error("Login FAIL Due to Some error");
+      toast.error(action.payload);
+      return {
+        ...state,
+      };
     default:
       break;
   }

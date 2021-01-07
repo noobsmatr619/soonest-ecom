@@ -41,25 +41,25 @@ describe('Task', () => {
         }).timeout(10000);
 
     });
-    // describe('delete the existing user', () => {
-    //     it('it should delete the  user', (done) => {
-    //         chai.request(server)
-    //             .delete('/api/user/deleteTest')
-    //             .set('Content-Type', 'application/json')
-    //             .set('x-auth-token', testData.Token)
-    //             .send({
-    //                 // "id": "5ff49215073e021e54403cc9",
-    //                 "actualName": "testssz"
-    //                 // "password": "Test1234!",
-    //             })
-    //             .end((err, response) => {
-    //                 response.should.have.status(200);
-    //                 done();
-    //             })
+    describe('delete the existing user', () => {
+        it('it should delete the  user', (done) => {
+            chai.request(server)
+                .delete('/api/user/deleteTest')
+                .set('Content-Type', 'application/json')
+                .set('x-auth-token', testData.Token)
+                .send({
+                    // "id": "5ff49215073e021e54403cc9",
+                    "actualName": "testssz"
+                    // "password": "Test1234!",
+                })
+                .end((err, response) => {
+                    response.should.have.status(200);
+                    done();
+                })
 
-    //     }).timeout(10000);
+        }).timeout(10000);
 
-    // });
+    });
 
     describe('Add an admin', () => {
         it('it should add an admin', (done) => {

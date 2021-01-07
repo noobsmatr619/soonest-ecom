@@ -39,7 +39,7 @@ function LoginAsAdmin() {
     setForm(data);
   };
   if (appcontext.isAuthenticated && appcontext.user && appcontext.user.admin) {
-    return <Redirect to='/' />;
+    return <Redirect to='/admin/addedproduct' />;
   }
 
   return (

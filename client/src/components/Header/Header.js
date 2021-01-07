@@ -80,172 +80,171 @@ function Header() {
         <img className='headerLogo' src='/Image/logo.png' alt='#' />
       </Link>
       {appcontext.isAuthenticated &&
-      appcontext.user &&
-      appcontext.user.admin ? (
-        <div className='headerLeftNav'>
-          {/* header option */}
-          <div className='headerLeftOpt'>
-            <span style={{ cursor: "pointer" }} className='headerOptLineOne'>
-              {" "}
-              <Link to='/' className='homestyle'>
+        appcontext.user &&
+        appcontext.user.admin ? (
+          <div className='headerLeftNav'>
+            {/* header option */}
+            <div className='headerLeftOpt'>
+              <span style={{ cursor: "pointer" }} className='headerOptLineOne'>
                 {" "}
-                <HomeIcon />{" "}
+                <Link to='/' className='homestyle'>
+                  {" "}
+                  <HomeIcon />{" "}
+                </Link>
+              </span>{" "}
+              <br />
+              <Link to='/' className='iconStyle'>
+                {" "}
+                <span className='headerOptLineTwo'>Home</span>{" "}
               </Link>
-            </span>{" "}
-            <br />
-            <Link to='/' className='iconStyle'>
-              {" "}
-              <span className='headerOptLineTwo'>Home</span>{" "}
-            </Link>
-          </div>
+            </div>
 
-          <div style={{ cursor: "pointer" }} className='headerLeftOpt'>
-            <Link to='/admin/addproduct' className='iconStyle'>
-              <span className='headerOptLineOne'>
+            <div style={{ cursor: "pointer" }} className='headerLeftOpt'>
+              <Link to='/admin/addproduct' className='iconStyle'>
+                <span className='headerOptLineOne'>
+                  {" "}
+                  <StoreIcon />{" "}
+                </span>{" "}
+                <br />
+                <span className='headerOptLineTwo'>
+                  Add <div style={{ marginLeft: "12px" }}>Product </div>{" "}
+                </span>
+              </Link>
+            </div>
+            <div style={{ cursor: "pointer" }} className='headerLeftOpt'>
+              <Link to='/admin/addedproduct' className='iconStyle'>
+                <span className='headerOptLineOne'>
+                  {" "}
+                  <StoreIcon />{" "}
+                </span>{" "}
+                <br />
+                <span className='headerOptLineTwo'>
+                  Added <div style={{ marginLeft: "12px" }}>Product</div>{" "}
+                </span>
+              </Link>
+            </div>
+            <div style={{ cursor: "pointer" }} className='headerLeftOpt  '>
+              <Link to='/admin/addblog' className='iconStyle'>
                 {" "}
-                <StoreIcon />{" "}
-              </span>{" "}
-              <br />
-              <span className='headerOptLineTwo'>
-                Add <div style={{ marginLeft: "12px" }}>Product </div>{" "}
-              </span>
-            </Link>
-          </div>
-          <div style={{ cursor: "pointer" }} className='headerLeftOpt'>
-            <Link to='/admin/addedproduct' className='iconStyle'>
-              <span className='headerOptLineOne'>
-                {" "}
-                <StoreIcon />{" "}
-              </span>{" "}
-              <br />
-              <span className='headerOptLineTwo'>
-                Added <div style={{ marginLeft: "12px" }}>Product</div>{" "}
-              </span>
-            </Link>
-          </div>
-          <div style={{ cursor: "pointer" }} className='headerLeftOpt  '>
-            <Link to='/admin/addblog' className='iconStyle'>
-              {" "}
-              <span className='headerOptTLineOne'>
-                <BookIcon />
-              </span>
-              <br />
-              <span className='headerOptLineTwo'>
-                {" "}
+                <span className='headerOptTLineOne'>
+                  <BookIcon />
+                </span>
+                <br />
+                <span className='headerOptLineTwo'>
+                  {" "}
                 Create <div style={{ marginLeft: "12px" }}>Blog</div>
-              </span>{" "}
-            </Link>
-          </div>
-          <div style={{ cursor: "pointer" }} className='headerLeftOpt'>
-            <Link to='/admin/addedblog' className='iconStyle'>
-              <span className='headerOptLineOne'>
-                {" "}
-                <StoreIcon />{" "}
-              </span>{" "}
-              <br />
-              <span className='headerOptLineTwo'>
-                Added <div style={{ marginLeft: "12px" }}>Blog</div>{" "}
-              </span>
-            </Link>
-          </div>
-          <div style={{ cursor: "pointer" }} className='headerLeftOpt'>
-            <Link to='/admin/addadmin' className='iconStyle'>
-              <span className='headerOptLineOne'>
-                {" "}
-                <StoreIcon />{" "}
-              </span>{" "}
-              <br />
-              <span className='headerOptLineTwo'>
-                Add <div style={{ marginLeft: "12px" }}>Admin</div>{" "}
-              </span>
-            </Link>
-          </div>
-        </div>
-      ) : (
-        <div className='headerLeftNav'>
-          {/* header option */}
-          <div className='headerLeftOpt'>
-            <span className='headerOptLineOne'>
-              {" "}
-              <Link to='/' className='homestyle'>
-                {" "}
-                <HomeIcon />{" "}
+                </span>{" "}
               </Link>
-            </span>{" "}
-            <br />
-            <Link to='/' className='iconStyle'>
-              {" "}
-              <span className='headerOptLineTwo'>Home</span>{" "}
-            </Link>
+            </div>
+            <div style={{ cursor: "pointer" }} className='headerLeftOpt'>
+              <Link to='/admin/addedblog' className='iconStyle'>
+                <span className='headerOptLineOne'>
+                  {" "}
+                  <StoreIcon />{" "}
+                </span>{" "}
+                <br />
+                <span className='headerOptLineTwo'>
+                  Added <div style={{ marginLeft: "12px" }}>Blog</div>{" "}
+                </span>
+              </Link>
+            </div>
+            <div style={{ cursor: "pointer" }} className='headerLeftOpt'>
+              <Link to='/admin/addadmin' className='iconStyle'>
+                <span className='headerOptLineOne'>
+                  {" "}
+                  <StoreIcon />{" "}
+                </span>{" "}
+                <br />
+                <span className='headerOptLineTwo'>
+                  Add <div style={{ marginLeft: "12px" }}>Admin</div>{" "}
+                </span>
+              </Link>
+            </div>
           </div>
-
-          <div className='headerLeftOpt'>
-            <Link to='/shop'>
+        ) : (
+          <div className='headerLeftNav'>
+            {/* header option */}
+            <div className='headerLeftOpt'>
               <span className='headerOptLineOne'>
                 {" "}
-                <StoreIcon />{" "}
+                <Link to='/' className='homestyle'>
+                  {" "}
+                  <HomeIcon />{" "}
+                </Link>
               </span>{" "}
               <br />
-              <span className='headerOptLineTwo'>Shop </span>
-            </Link>
-          </div>
-          <div className='headerLeftOpt  '>
-            <Link to='/blog' className='iconStyle'>
-              {" "}
-              <span className='headerOptTLineOne'>
-                <BookIcon />
-              </span>
-              <br />
-              <span className='headerOptLineTwo'> Blog</span>{" "}
-            </Link>
-          </div>
-          <div>{/* <DarkModeToggle /> */}</div>
-        </div>
-      )}
-      {appcontext.isAuthenticated &&
-      appcontext.user &&
-      appcontext.user.admin ? (
-        <>.</>
-      ) : (
-        <div className='headerSearch'>
-          <input
-            className='headerSearchInput'
-            type='text'
-            onChange={(e, r) => {
-              console.log(r);
-              appcontext.filterproducts(e.target.value);
-            }}
-            placeholder='Search Anything'
-          />
-        </div>
-      )}
+              <Link to='/' className='iconStyle'>
+                {" "}
+                <span className='headerOptLineTwo'>Home</span>{" "}
+              </Link>
+            </div>
 
+            <div className='headerLeftOpt'>
+              <Link to='/shop'>
+                <span className='headerOptLineOne'>
+                  {" "}
+                  <StoreIcon className="iconStyle" />{" "}
+                </span>{" "}
+                <br />
+                <span className='headerOptLineTwo iconStyle'>Shop </span>
+              </Link>
+            </div>
+            <div className='headerLeftOpt  '>
+              <Link to='/blog' className='iconStyle'>
+                {" "}
+                <span className='headerOptTLineOne'>
+                  <BookIcon />
+                </span>
+                <br />
+                <span className='headerOptLineTwo'> Blog</span>{" "}
+              </Link>
+            </div>
+            <div>{/* <DarkModeToggle /> */}</div>
+          </div>
+        )}
       {appcontext.isAuthenticated &&
-      appcontext.user &&
-      appcontext.user.admin ? (
-        <div style={{ alignIitems: "flex-end" }} className='headerRightNav'>
-          <span className='headerBasketCount'></span>
-          <AuthOptions />
-          <span className='headerRightOption'>
-            <SettingsIcon />
-          </span>
-        </div>
-      ) : (
-        <div style={{ alignIitems: "flex-end" }} className='headerRightNav'>
-          <span className='headerBasketCount'>
-            {appcontext.cart ? appcontext.cart.length : 0}
-          </span>
-          <Link to='/buy'>
-            <span className='headerRightOption'>
-              <ShoppingBasketIcon />
+        appcontext.user &&
+        appcontext.user.admin ? (
+          <>.</>
+        ) : (
+          <div className='headerSearch'>
+            <input
+              className='headerSearchInput'
+              type='text'
+              onChange={(e, r) => {
+                console.log(r);
+                appcontext.filterproducts(e.target.value);
+              }}
+              placeholder='Search Anything'
+            />
+          </div>
+        )}
+      {/* admin */}
+      {appcontext.isAuthenticated &&
+        appcontext.user &&
+        appcontext.user.admin ? (
+          <div style={{ alignIitems: "flex-end" }} className='headerRightNav'>
+            <span className='headerBasketCount'></span>
+            <AuthOptions />
+
+          </div>
+        ) : (
+          // user
+          <div style={{ alignIitems: "flex-end" }} className='headerRightNav'>
+            <span className='headerBasketCount'>
+              {appcontext.cart ? appcontext.cart.length : 0}
             </span>
-          </Link>
-          <AuthOptions />
-          <span className='headerRightOption'>
-            <SettingsIcon />
-          </span>
-        </div>
-      )}
+            <Link to='/buy'>
+              <span className='headerRightOption'>
+                <ShoppingBasketIcon />
+              </span>
+            </Link>
+            <AuthOptions />
+
+
+
+          </div>
+        )}
       <Switch onChange={() => appcontext.switchMode()} />
     </div>
   );
