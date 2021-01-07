@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 5000;
 const db = mongoose.connection;
 const root = require("path").join(__dirname, "client", "build");
 
+
 connectDB();
 app.use(cors());
 app.use(express.json({ extended: true }));
