@@ -7,3 +7,5 @@ module.exports = {
         }
     }
 };
+
+//checks if user is customer 

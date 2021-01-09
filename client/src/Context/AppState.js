@@ -599,7 +599,7 @@ const AppState = props => {
     console.log(cart3);
     dispatch({
       type: ADD_TO_WISHLIST,
-      payload: cart3,
+      payload: cart3, //payload has the response from the server
     });
   };
   const removeAuthFromCart = async products => {
@@ -716,3 +716,6 @@ const AppState = props => {
   );
 };
 export default AppState;
+
+
+

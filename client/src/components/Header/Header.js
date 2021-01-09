@@ -245,7 +245,8 @@ function Header() {
 
           </div>
         )}
-      <Switch onChange={() => appcontext.switchMode()} />
+      <Switch checkedChildren="L"
+        unCheckedChildren="N" onChange={() => appcontext.switchMode()} />
     </div>
   );
 }

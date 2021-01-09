@@ -43,7 +43,7 @@ const BlogShow = () => {
                 />
                 <CardBody>
                   <CardTitle tag='h5'>{b.title}</CardTitle>
-                  <CardSubtitle tag='h6' classNa me='mb-2 text-muted'>
+                  <CardSubtitle tag='h6' className='mb-2 text-muted'>
                     {b.category}
                   </CardSubtitle>
                   <CardText>{toShow(b.editor)}</CardText>

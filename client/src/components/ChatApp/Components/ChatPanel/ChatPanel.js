@@ -28,13 +28,13 @@ function ChatPanel({ chats }) {
         <FaceIcon />
         <div className='topChatDetails'>
           <h3>{appcontext.userbyid && appcontext.userbyid.email}</h3>
-          <p>Viewed at..</p>
+          {/* <p>Viewed at..</p> */}
         </div>
         <div className='topChatRight'>
-          <IconButton>
+          {/* <IconButton>
             {" "}
             <SearchIcon />
-          </IconButton>
+          </IconButton> */}
         </div>
       </div>
       <div className='mainChat'>
@@ -52,7 +52,7 @@ function ChatPanel({ chats }) {
       </div>
       <div className='bottomPanel'>
         <IconButton>
-          <EmojiEmotionsIcon />
+          {/* <EmojiEmotionsIcon /> */}
         </IconButton>
         <form>
           <input
@@ -71,9 +71,9 @@ function ChatPanel({ chats }) {
         <IconButton onClick={sendChat}>
           <SendIcon />
         </IconButton>
-        <IconButton>
+        {/* <IconButton>
           <MicIcon />
-        </IconButton>
+        </IconButton> */}
       </div>
     </div>
   );

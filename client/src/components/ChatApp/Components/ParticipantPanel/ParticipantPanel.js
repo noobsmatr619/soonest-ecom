@@ -26,16 +26,16 @@ function ParticipantPanel() {
         </IconButton>
 
         <div className='participantTopRight'>
-          <IconButton>
+          {/* <IconButton>
             <QuestionAnswerIcon />
-          </IconButton>
+          </IconButton> */}
           <IconButton>
-            <AccessibilityNewIcon />{" "}
+            {/* <AccessibilityNewIcon />{" "} */}
             {/* might wanna change it to day night interchangable later*/}
           </IconButton>
         </div>
       </div>
-      <div className='participantsearch'>
+      {/* <div className='participantsearch'>
         <div className='participantSearcholder'>
           <IconButton>
             {" "}
@@ -43,7 +43,7 @@ function ParticipantPanel() {
           </IconButton>
           <input placeholder='Search Chat' type='text' />
         </div>
-      </div>
+      </div> */}
       <div className='sidebarParticipants'>
         {appcontext.user && appcontext.user.admin ? (
           <>
@@ -59,20 +59,20 @@ function ParticipantPanel() {
               ))}
           </>
         ) : (
-          <>
-            {appcontext.admin &&
-              appcontext.admin.map(a => (
-                <>
-                  {console.log(a)}
-                  <ParticipantMessages
-                    admin={a}
-                    name={a.actualName}
-                    email={a.email}
-                  />
-                </>
-              ))}
-          </>
-        )}
+            <>
+              {appcontext.admin &&
+                appcontext.admin.map(a => (
+                  <>
+                    {console.log(a)}
+                    <ParticipantMessages
+                      admin={a}
+                      name={a.actualName}
+                      email={a.email}
+                    />
+                  </>
+                ))}
+            </>
+          )}
 
         {/* <Scrollbars/> */}
       </div>

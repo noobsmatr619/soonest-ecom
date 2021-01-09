@@ -53,7 +53,7 @@ const AddProduct = () => {
     setprofileImage(data);
   };
   let onSubmit = e => {
-    e.preventDefault();
+    e.preventDefault(); //submit will re occur again and again 
     let form = new FormData();
     const update = async () => {
       form.append("name", Form.name);

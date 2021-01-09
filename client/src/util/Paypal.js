@@ -53,3 +53,4 @@ export default class Paypal extends React.Component {
     );
   }
 }
+//paypal documentation
