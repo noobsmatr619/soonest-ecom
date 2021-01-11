@@ -217,7 +217,7 @@ router.post("/login", async (req, res) => {
 // DELETE
 router.delete("/delete", auth, async (req, res) => {
   try {
-    let deletedUser = await User.findOneAndDelete({ "actualName": "testssz", wtimeout: 100 });
+    let deletedUser = await User.findOneAndDelete({ "email": req.body.email });
     res.json(deletedUser);
   } catch (err) {
     res.status(500).json({ error: err.message });
