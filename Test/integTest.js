@@ -1,39 +1,48 @@
-const express = require("express");
-const app = express();
-const connectDB = require("../config/db");
+// const express = require("express");
+// const app = express();
+// const connectDB = require("../config/db");
+// let chai = require("chai");
+// let chaiHttp = require("chai-http");
+// let server = require("../server");
+
+// const mongoose = require("mongoose");
+
+// chai.use(chaiHttp);
+
+// suite("Server Integration Test", function () {
+//     suiteSetup(() => {
+//         mongoose.set("debug", false);
+//     });
+
+
+
+//     suiteTeardown((done) => {
+
+//         mongoose.disconnect(() => {
+//             mongoose.connection.close(done)
+//             done();
+//             //server.app.close();
+//         });
+//     });
+
+// });
+let mongoose = require("mongoose");
 let chai = require("chai");
-let chaiHttp = require("chai-http");
-let server = require("../server");
 
-const mongoose = require("mongoose");
+const config = require("config");
+const db = config.get("MongoURL");
+suite("Server Integration Test", function () {
 
-chai.use(chaiHttp);
-
-suite("Integration Tests", function () {
-    suiteSetup(() => {
-
-        mongoose.set("debug", false);
-    });
-
-    test("Test GET /", async function () {
-        connectDB();
-
-        chai
-            .request(app)
-            .get("/")
-            .end(function (error, response) {
-                chai.assert.equal(response.status, 200, "Wrong status code");
-
-            });
+    suiteSetup(function () {
+        mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true });
+        console.log("DB ReadyState: " + mongoose.connection.readyState);
     });
 
 
-    suiteTeardown((done) => {
-
-        mongoose.disconnect(() => {
-            mongoose.connection.close(done);
-            //server.app.close();
-        });
+    suiteTeardown(function (done) {
+        mongoose.connection.close();
+        done();
     });
+
 
 });

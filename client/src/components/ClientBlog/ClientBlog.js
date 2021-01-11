@@ -23,23 +23,36 @@ import {
 const ClientBlog = () => {
   const history = useHistory();
   const appcontext = useContext(AppContext);
+  const [Blog, setBlog] = useState(
+    Array(appcontext.blogs.length)
+      .fill()
+      .map((v, i) => false)
+  );
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
   useEffect(() => {
-    appcontext.getAllBlog();
+    const asfunction = async () => {
+      await appcontext.getAllBlog();
+      let Blog = Array(appcontext.blogs.length)
+        .fill()
+        .map((v, i) => false);
+      setBlog(Blog);
+    };
+    asfunction();
   }, []);
   const toShow = con => {
     let content = parse(con);
     return content;
   };
+
   return (
     <div>
       <Row>
         {console.log(appcontext)}
         {appcontext.blogs &&
           appcontext.blogs.length &&
-          appcontext.blogs.map(b => (
+          appcontext.blogs.map((b, i) => (
             <>
               <Col sm='6'>
                 <Card body>
@@ -55,16 +68,38 @@ const ClientBlog = () => {
                       {b.category}
                     </CardSubtitle>
                     <CardText>.</CardText>
-                    <Button onClick={toggle}>Read Detail</Button>
+                    <Button
+                      onClick={() => {
+                        let data = [...Blog];
+                        data[i] = true;
+                        setBlog(data);
+                      }}
+                    >
+                      Read Detail
+                    </Button>
                     {"   "}
                   </CardBody>
                 </Card>
               </Col>
-              <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>{b.title}</ModalHeader>
+              <Modal
+                isOpen={Blog[i]}
+                toggle={() => {
+                  let data = [...Blog];
+                  data[i] = !data[i];
+                  setBlog(data);
+                }}
+              >
+                <ModalHeader>{b.title}</ModalHeader>
                 <ModalBody>{toShow(b.editor)}</ModalBody>
                 <ModalFooter>
-                  <Button color='secondary' onClick={toggle}>
+                  <Button
+                    color='secondary'
+                    onClick={() => {
+                      let data = [...Blog];
+                      data[i] = false;
+                      setBlog(data);
+                    }}
+                  >
                     Close
                   </Button>
                 </ModalFooter>

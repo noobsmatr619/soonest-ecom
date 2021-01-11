@@ -7,7 +7,7 @@ import AppReducer from "./AppReducer";
 import axios from "axios";
 import setAuthToken from "../util/setAuthToken";
 import { APIs } from "../constraint/API";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import {
   REGISTER_USER,
   REGISTER_USER_FAIL,
@@ -101,7 +101,10 @@ const AppState = props => {
       console.log(error);
     }
   };
-  const filterproducts = val => {
+  const filterproducts = (val, location, history1) => {
+    if (location != "/shop") {
+      history1.push("/shop");
+    }
     dispatch({ type: FILTER_PRODUCTS, payload: val });
   };
   const emptyCart = () => {
@@ -716,6 +719,3 @@ const AppState = props => {
   );
 };
 export default AppState;
-
-
-
