@@ -76,7 +76,7 @@ function Product({ id, name, cost, stars, image, product }) {
         </Link>
       </div>
       <img src={image} alt='#' />
-      {location.pathname === "/admin/addedproduct" ? (
+      { appcontext.isAuthenticated && appcontext.user && appcontext.user.admin ? (
         <>
           <span
             style={{ cursor: "pointer" }}
@@ -99,7 +99,7 @@ function Product({ id, name, cost, stars, image, product }) {
         </>
       ) : (
           <>
-            {appcontext.isAuthenticated && appcontext.user ? (
+            {appcontext.isAuthenticated && appcontext.user && !appcontext.user.admin ? (
               <>
                 {console.log("in auth")}
                 {!add ? (

@@ -57,7 +57,7 @@ function Home() {
             appcontext.products.map((product, i) => {
               if (i <= 0) {
                 return (
-                  <Product
+                  <Product 
                     product={product}
                     id={product._id}
                     name={product.name}
