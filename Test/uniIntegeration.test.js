@@ -11,7 +11,7 @@ const testUser = require("../Model/User");
 const testChat = require("../Model/Chat");
 
 // Starting Unit test for database
-
+console.log("Starting Unit Tests")
 describe('Mongo DB Collection tests', () => {
     before(async () => {
         await mongoose.connect(process.env.MONGODB_URI, {
@@ -155,7 +155,7 @@ describe('Mongo DB Collection tests', () => {
 
 
 // Starting integeration Test
-
+console.log("Starting integeration Test")
 chai.should();
 
 chai.use(chaiHttp);
@@ -300,7 +300,7 @@ describe('Routes Testing', () => {
 
         }).timeout(10000);
 
-       
+
         it('Admin deletion with authorization', (done) => {
             chai.request(server)
                 .delete('/api/user/delete')
