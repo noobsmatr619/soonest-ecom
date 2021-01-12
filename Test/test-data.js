@@ -1,12 +1,12 @@
 const createNewUser = {
     "_id": "5ff49215073e021e54403cc9",
-    "email": "testUser1@test.com",
+    "email": "testUser1@test4.com",
     "password": "Test1234!",
     "actualName": "testssz"
 }
 
 const loginUser = {
-    "email": "testUser1@test.com",
+    "email": "testUser1@test4.com",
     "password": "Test1234!"
 }
 const addProduct = {
