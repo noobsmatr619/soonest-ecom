@@ -8,6 +8,7 @@ import DraftsIcon from "@material-ui/icons/Drafts";
 import AppContext from "../../Context/AppContext";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 import "./Addblog.css";
 const Addblog = () => {
   const history = useHistory();
@@ -91,15 +92,15 @@ const Addblog = () => {
 
         {/* https://github.com/mkhstar/suneditor-react  */}
         <IconButton onClick={onSubmit}>
-          <SaveIcon />
+          <SaveIcon className="saveIcon" />
         </IconButton>
-        <IconButton>
-          <DeleteIcon />
-        </IconButton>
-        <IconButton>
-          {" "}
-          <DraftsIcon />
-        </IconButton>
+        <Link to='/' >
+          <IconButton>
+
+            <DeleteIcon className="deleteDanger" />
+
+          </IconButton>
+        </Link>
       </div>
     </div>
   );

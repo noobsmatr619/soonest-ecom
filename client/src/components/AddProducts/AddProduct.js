@@ -133,7 +133,7 @@ const AddProduct = () => {
           />
           <br />
 
-          <button type='submit'>submit</button>
+          <button type='submit' className="submitButton">submit</button>
 
         </div>
       </form>

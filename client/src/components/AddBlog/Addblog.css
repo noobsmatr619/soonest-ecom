@@ -17,5 +17,9 @@
   margin: 1%;
 }
 .saveIcon{
-  color: #007bff;
+  color: #007bff!important;
+}
+
+.deleteDanger{
+  color: red!important;
 }
