@@ -22,6 +22,7 @@ function AllOder() {
                     <Product
                       product={product}
                       id={product.id}
+                      address={p.data[0] && p.data[0].address}
                       date={product.dateOfPurchase}
                       name={product.name}
                       cost={product.price}

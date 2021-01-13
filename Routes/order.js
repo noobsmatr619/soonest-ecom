@@ -27,6 +27,7 @@ router.post("/", auth, async (req, res) => {
         dateOfPurchase: moment(Date.now()),
         name: item.name,
         id: item._id,
+        address: req.body.paymentData.address,
         rate: false,
         image: item.image,
         star: item.star,

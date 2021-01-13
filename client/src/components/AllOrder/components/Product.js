@@ -3,7 +3,17 @@ import React from "react";
 import moment from "moment";
 import "./Product.css";
 import { Link } from "react-router-dom";
-function Product({ id, name, cost, star, image, product, payment, date }) {
+function Product({
+  id,
+  name,
+  cost,
+  star,
+  image,
+  product,
+  payment,
+  date,
+  address,
+}) {
   return (
     <div className='product'>
       <div className='infoProd'>
@@ -12,6 +22,12 @@ function Product({ id, name, cost, star, image, product, payment, date }) {
           <p className='prodPrice'>
             <small>£</small>
             <strong>{cost}</strong>
+          </p>
+          <p className='prodPrice'>
+            <small>Address</small>
+            <strong>{`${address && address.line1} , ${
+              address && address.city
+            }`}</strong>
           </p>
           <p className='prodPrice'>
             <strong>{moment(date).format("YYYY-MM-DD")}</strong>
