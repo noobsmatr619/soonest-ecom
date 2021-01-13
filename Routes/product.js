@@ -48,7 +48,7 @@ router.post(
         price,
       });
       await newProduct.save();
-      res.status(200).json({ success: true });
+      res.status(200).json({ success: true, id: response._id });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

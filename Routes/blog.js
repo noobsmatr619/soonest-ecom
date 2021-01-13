@@ -47,7 +47,7 @@ router.post(
       });
       console.log(Blog);
       await blog.save();
-      res.status(200).json({ success: true });
+      res.status(200).json({ success: true, id: response._id });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
