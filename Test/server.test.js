@@ -23,16 +23,16 @@ app.use("/api/blog", require("./../Routes/blog"));
 app.use("/api/cart", require("./../Routes/Cart"));
 app.use("/api/message", require("./../Routes/chat"));
 app.use("/api/order", require("./../Routes/order"));
-  io.on("connection", socket => {
-    // console.log(socket.id);
-    socket.on("notificaton", id => {
-      // console.log(id);
-      socket.broadcast.emit("notificaton", socket.id);
-    });
-    socket.on("disconnect", function () {
-      // console.log("disconnect");
-    });
+io.on("connection", socket => {
+  // console.log(socket.id);
+  socket.on("notificaton", id => {
+    // console.log(id);
+    socket.broadcast.emit("notificaton", socket.id);
   });
+  socket.on("disconnect", function () {
+    // console.log("disconnect");
+  });
+});
 
 app.get("*", (req, res) => {
   res.sendFile("index.html", { root });
