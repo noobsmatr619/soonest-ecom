@@ -102,9 +102,9 @@ const AppState = props => {
     }
   };
   const filterproducts = (val, location, history1) => {
-    // if (location != "/shop") {
-    //   history1.push("/shop");
-    // }
+    if (location != "/shop") {
+      history1.push("/shop");
+    }
     dispatch({ type: FILTER_PRODUCTS, payload: val });
   };
   const emptyCart = () => {
@@ -145,7 +145,7 @@ const AppState = props => {
         type: GET_USER_BY_ID,
         payload: res.data,
       });
-    } catch (error) {}
+    } catch (error) { }
   };
 
   //lOAD ADMIN

@@ -3,7 +3,10 @@ import { APIs } from "../../constraint/API";
 import Product from "../Product/Product";
 import "./ProductShow.css";
 import AppContext from "../../Context/AppContext";
+import { useLocation, useHistory } from 'react-router-dom'
 function ProductShow() {
+  const location = useLocation();
+  const history = useHistory();
   const appcontext = useContext(AppContext);
   useEffect(() => {
     appcontext.getAllProduct();
@@ -18,7 +21,7 @@ function ProductShow() {
             <span
               style={{ cursor: "pointer" }}
               onClick={() => {
-                appcontext.filterproducts("");
+                appcontext.filterproducts("", location, history);
               }}
             >
               Any
@@ -27,7 +30,7 @@ function ProductShow() {
             <span
               style={{ cursor: "pointer" }}
               onClick={() => {
-                appcontext.filterproducts("Electro");
+                appcontext.filterproducts("Electro", location, history);
               }}
             >
               Electronics
@@ -37,7 +40,7 @@ function ProductShow() {
             <span
               style={{ cursor: "pointer" }}
               onClick={() => {
-                appcontext.filterproducts("candles");
+                appcontext.filterproducts("candles", location, history);
               }}
             >
               Candles
@@ -47,7 +50,7 @@ function ProductShow() {
             <span
               style={{ cursor: "pointer" }}
               onClick={() => {
-                appcontext.filterproducts("birds");
+                appcontext.filterproducts("birds", location, history);
               }}
             >
               Birds
@@ -68,8 +71,8 @@ function ProductShow() {
                 />
               ))
             ) : (
-              <h3>No Product to Show</h3>
-            )}
+                <h3>No Product to Show</h3>
+              )}
           </div>
         </div>
       </div>
