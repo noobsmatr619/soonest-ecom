@@ -50,4 +50,8 @@ http.listen(PORT, () => {
 });
 module.exports = app;
 
+<<<<<<< HEAD
 //check 2
+=======
+//check
+>>>>>>> 8c372e358ee03165331c88453a2ad265ac0941d7
