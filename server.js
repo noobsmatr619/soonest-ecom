@@ -36,7 +36,7 @@ db.once("open", function () {
       socket.broadcast.emit("notificaton", socket.id);
     });
     socket.on("disconnect", function () {
-      // console.log("disconnect");
+      // dd console.log("disconnect");
     });
   });
  2});
