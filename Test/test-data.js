@@ -47,5 +47,5 @@ const addToCart = {
     "star": 64,
     "price": 354,
     "description": "asds"
-}
+}//check
 module.exports = { createNewUser, loginUser, addBlog, Token, addAdmin, AdminToken, listOneProduct, addProduct, deleteProduct, resetPasswordEmail, addToCart, DeleteBlogId }
