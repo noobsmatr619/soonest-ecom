@@ -13,6 +13,6 @@ script:
 # change this to actual tests later
 
 notifications:
-  email: true
+  email: false
    
   
